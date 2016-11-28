@@ -13,7 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import org.apache.http.client.HttpClient;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     EditText edit_text;
     String editTextInputString = "Dummy Content";
     Button led_on_off;
+    Switch ledSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
         edit_text = (EditText) findViewById(R.id.edit_text);
         led_on_off = (Button) findViewById(R.id.led_on_off);
-
+        ledSwitch = (Switch) findViewById(R.id.ledSwitch);
+        ledSwitchListener();
     }
 
     @Override
@@ -170,6 +174,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void ledSwitchListener() {
+        ledSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (NetworkAccessInfo.isNetworkAvailable(getApplicationContext())) {
+                    new MyAsyncTask().execute();
+                } else {
+                    Toast.makeText(MainActivity.this, "Internet Not Connected", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
 
 
@@ -194,8 +211,10 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
             if (bit.equals("ON")) {
                 led_on_off.setText("Turn LED OFF");
+//                ledSwitch.setChecked(true);
             } else {
                 led_on_off.setText("Turn LED ON");
+//                ledSwitch.setChecked(true);
             }
             if (SetServerString.contains("Exception")) {
                 Toast.makeText(MainActivity.this, SetServerString, Toast.LENGTH_SHORT).show();
@@ -206,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void http_get_request(String bit) {
         try {
-            String URL = "http://10.50.240.174/LED=" + bit;
+            String URL = "http://192.168.0.101/LED=" + bit;
             HttpClient httpClient = new DefaultHttpClient();
             try {
                 HttpGet httpget = new HttpGet(URL);
@@ -218,8 +237,8 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         bit = "OFF";
                     }
-                }else {
-
+                } else {
+                    SetServerString = "Something went wrong!";
                 }
 //                Toast.makeText(this, "SetServerString: " + SetServerString, Toast.LENGTH_SHORT).show();
             } catch (Exception ex) {
