@@ -64,5 +64,6 @@
     <string name="title_activity_splash">@string/app_name</string>
     <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_led_controll">LedControllActivity</string>
 
 </resources>

@@ -168,7 +168,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void ledOnOFFClickListener(View view) {
         if (NetworkAccessInfo.isNetworkAvailable(getApplicationContext())) {
-            new MyAsyncTask().execute();
+            Intent intent = new Intent(getApplicationContext(), LedControllActivity.class);
+            startActivity(intent);
+//            new MyAsyncTask().execute();
         } else {
             Toast.makeText(this, "Internet Not Connected", Toast.LENGTH_SHORT).show();
         }

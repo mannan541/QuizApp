@@ -91,6 +91,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.android.quizapp.MainActivity" />
         </activity>
+        <activity
+            android:name=".LedControllActivity"
+            android:label="@string/title_activity_led_controll"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.quizapp.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
