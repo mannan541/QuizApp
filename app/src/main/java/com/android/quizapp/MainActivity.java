@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -214,6 +216,11 @@ public class MainActivity extends AppCompatActivity {
                 .setDefaults(Notification.DEFAULT_SOUND)
                 .getNotification();
         nm.notify(0, notification);
+    }
+
+    public void webViewClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(),WebVeiwActivity.class);
+        startActivity(intent);
     }
 
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
