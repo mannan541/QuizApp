@@ -68,5 +68,6 @@
     <string name="title_activity_web_veiw">WebVeiwActivity</string>
     <string name="title_activity_phone_call">PhoneCallActivity</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

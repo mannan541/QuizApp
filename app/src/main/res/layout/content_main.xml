@@ -140,6 +140,13 @@
                 android:layout_alignParentStart="true"
                 android:onClick="checkInternetClickListener"
                 android:text="Check Internet" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:onClick="sendSMSClickListener"
+                android:text="Send SMS to 0304442212" />
 
             <Button
                 android:id="@+id/led_on_off"

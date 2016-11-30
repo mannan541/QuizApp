@@ -30,6 +30,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText edit_text;
@@ -158,6 +160,13 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = pref.edit();
             editor.clear();
             editor.commit();
+
+            List<User> userList = User.find(User.class,"email=?", userEmail);
+            String email = null;
+            for (User user: userList){
+                user.delete();
+            }
+
             showAlertDialog(userEmail);
 //            Toast.makeText(this, "User " + userEmail + " Logout Successfully.", Toast.LENGTH_SHORT).show();
         } else {
@@ -244,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(Intent.createChooser(email, "Choose an email client from..."));
             finish();
         } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(this, "ActivityNotFoundException: "+ex, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "ActivityNotFoundException: " + ex, Toast.LENGTH_SHORT).show();
         }
     }
 

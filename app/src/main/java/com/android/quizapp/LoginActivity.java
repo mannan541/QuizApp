@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.List;
+
+import static com.android.quizapp.R.id.email;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText mEmailView;
@@ -21,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mEmailView = (EditText) findViewById(R.id.email);
+        mEmailView = (EditText) findViewById(email);
         mPasswordView = (EditText) findViewById(R.id.password);
         mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
 
@@ -45,6 +49,14 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "You are successfully logged in as: "
                                     + mEmailView.getText().toString() + " with password: " + mPasswordView.getText().toString(),
                             Toast.LENGTH_SHORT).show();
+
+                    List<User> loginInfoList = User.find(User.class, "email = ? ", mEmailView.getText().toString());
+                    if (loginInfoList.size() == 0 || loginInfoList.equals(null)) {
+                        User user = new User("Name",
+                                mEmailView.getText().toString(),
+                                mPasswordView.getText().toString());
+                        user.save();
+                    }
 
                     Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                     startActivity(intent);

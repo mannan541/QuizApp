@@ -9,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class ProfileActivity extends AppCompatActivity {
 
     TextView userNameTextView;
@@ -34,6 +36,12 @@ public class ProfileActivity extends AppCompatActivity {
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         String userEmail = pref.getString("email", "");
+
+        List<User> userList = User.find(User.class,"email=?", userEmail);
+        String email = null;
+        for (User user: userList){
+            email =  user.getEmail();
+        }
 
         userNameTextView.setText(userEmail);
 
