@@ -99,7 +99,7 @@ public class LedControllActivity extends AppCompatActivity {
 
     public void http_get_request(String bit) {
         try {
-            String URL = "http://192.168.0.101/LED=" + bit;
+            String URL = "http://192.168.0.103/LED=" + bit;
             HttpClient httpClient = new DefaultHttpClient();
             try {
                 HttpGet httpget = new HttpGet(URL);

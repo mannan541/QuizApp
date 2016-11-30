@@ -1,7 +1,12 @@
 package com.android.quizapp;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -187,6 +192,28 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void notificationBtnClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(),
+                0, intent,
+                PendingIntent.FLAG_CANCEL_CURRENT);
+        NotificationManager nm = (NotificationManager) getApplicationContext()
+                .getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification.Builder builder = new Notification.Builder(getApplicationContext());
+        Notification notification = builder
+                .setContentIntent(contentIntent)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+                .setWhen(System.currentTimeMillis())
+                .setAutoCancel(true)
+                .setContentTitle("Title")
+                .setTicker("Ticker Title")
+                .setContentText("Notification Description Content.")
+                .setDefaults(Notification.DEFAULT_SOUND)
+                .getNotification();
+        nm.notify(0, notification);
     }
 
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
