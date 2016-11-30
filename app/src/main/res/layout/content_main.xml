@@ -105,6 +105,12 @@
                 android:text="Web View" />
 
             <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="phoneCallClickListener"
+                android:text="Phone Call" />
+
+            <Button
                 android:id="@+id/loginBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -138,6 +144,7 @@
                 android:layout_alignParentStart="true"
                 android:onClick="ledOnOFFClickListener"
                 android:text="Turn LED ON" />
+
             <Button
                 android:id="@+id/notification_button"
                 android:layout_width="match_parent"
