@@ -1,5 +1,6 @@
 package com.android.quizapp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -44,6 +45,9 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "You are successfully logged in as: "
                                     + mEmailView.getText().toString() + " with password: " + mPasswordView.getText().toString(),
                             Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                    startActivity(intent);
                     finish();
                 }
             }

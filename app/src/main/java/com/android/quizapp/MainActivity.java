@@ -129,6 +129,8 @@ public class MainActivity extends AppCompatActivity {
         String userEmail = pref.getString("email", "");
         if (isLoggedIn) {
             Toast.makeText(this, "Already Logged in as : " + userEmail + ".\nLog out First.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            startActivity(intent);
         } else {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
@@ -248,7 +250,6 @@ public class MainActivity extends AppCompatActivity {
 
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
 
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -310,4 +311,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
+//        startActivity(intent);
+    }
 }
