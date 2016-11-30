@@ -109,6 +109,11 @@
                 android:layout_height="wrap_content"
                 android:onClick="phoneCallClickListener"
                 android:text="Phone Call" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="sendEmailListner"
+                android:text="Send Email" />
 
             <Button
                 android:id="@+id/loginBtn"

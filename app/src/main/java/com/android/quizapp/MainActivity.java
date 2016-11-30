@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -219,13 +220,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void webViewClickListener(View view) {
-        Intent intent = new Intent(getApplicationContext(),WebVeiwActivity.class);
+        Intent intent = new Intent(getApplicationContext(), WebVeiwActivity.class);
         startActivity(intent);
     }
 
     public void phoneCallClickListener(View view) {
         Intent intent = new Intent(getApplicationContext(), PhoneCallActivity.class);
         startActivity(intent);
+    }
+
+    public void sendEmailListner(View view) {
+        //        String[] recipients = {recipient.getText().toString()};
+        Intent email = new Intent(Intent.ACTION_SEND, Uri.parse("mailto:"));
+        // prompts email clients only
+        email.setType("message/rfc822");
+//        email.putExtra(Intent.EXTRA_EMAIL, recipients);
+        email.putExtra(Intent.EXTRA_SUBJECT, "Subject Text");
+        email.putExtra(Intent.EXTRA_TEXT, "\n\nRegards, \nDIYGEEKS Team");
+        try {
+            // the user can choose the email client
+            startActivity(Intent.createChooser(email, "Choose an email client from..."));
+            finish();
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this, "ActivityNotFoundException: "+ex, Toast.LENGTH_SHORT).show();
+        }
     }
 
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
