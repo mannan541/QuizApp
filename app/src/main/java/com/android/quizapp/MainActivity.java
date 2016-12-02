@@ -15,6 +15,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -255,6 +256,11 @@ public class MainActivity extends AppCompatActivity {
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(this, "ActivityNotFoundException: " + ex, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void sendSMSClickListener(View view) {
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage("03044422122", null, "From Quiz message", null, null);
     }
 
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
