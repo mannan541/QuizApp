@@ -25,6 +25,8 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.github.anastr.speedviewlib.Speedometer;
+
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
@@ -162,9 +164,9 @@ public class MainActivity extends AppCompatActivity {
             editor.clear();
             editor.commit();
 
-            List<User> userList = User.find(User.class,"email=?", userEmail);
+            List<User> userList = User.find(User.class, "email=?", userEmail);
             String email = null;
-            for (User user: userList){
+            for (User user : userList) {
                 user.delete();
             }
 
@@ -236,6 +238,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void webViewInAppBrowserClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), WebViewInAppBrowserActivity.class);
+        startActivity(intent);
+    }
+
     public void phoneCallClickListener(View view) {
         Intent intent = new Intent(getApplicationContext(), PhoneCallActivity.class);
         startActivity(intent);
@@ -262,6 +269,12 @@ public class MainActivity extends AppCompatActivity {
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage("03044422122", null, "From Quiz message", null, null);
     }
+
+    public void speedometerBtnClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), SpeedometerActivity.class);
+        startActivity(intent);
+    }
+
 
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
 

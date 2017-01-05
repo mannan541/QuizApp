@@ -69,5 +69,11 @@
     <string name="title_activity_phone_call">PhoneCallActivity</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_web_view_in_app_browser">WebViewInAppBrowserActivity</string>
+    <string name="action_bookmark">Book Mark</string>
+    <string name="action_back">Back</string>
+    <string name="action_forward">Forward</string>
+    <string name="title_activity_browser">BrowserActivity</string>
+    <string name="title_activity_speedometer">SpeedometerActivity</string>
 
 </resources>
