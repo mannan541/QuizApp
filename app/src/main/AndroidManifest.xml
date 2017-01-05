@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".MyApplication"
@@ -163,6 +164,15 @@
         <activity
             android:name=".SpeedometerActivity"
             android:label="@string/title_activity_speedometer"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.quizapp.MainActivity" />
+        </activity>
+        <activity
+            android:name=".QRCodeActivity"
+            android:label="@string/title_activity_qrcode"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

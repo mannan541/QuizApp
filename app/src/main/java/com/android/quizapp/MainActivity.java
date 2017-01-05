@@ -25,7 +25,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.github.anastr.speedviewlib.Speedometer;
+import com.google.zxing.qrcode.encoder.QRCode;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -272,6 +272,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void speedometerBtnClickListener(View view) {
         Intent intent = new Intent(getApplicationContext(), SpeedometerActivity.class);
+        startActivity(intent);
+    }
+
+    public void qrCodeClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), QRCodeActivity.class);
         startActivity(intent);
     }
 

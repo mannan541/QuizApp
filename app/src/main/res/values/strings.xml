@@ -75,5 +75,6 @@
     <string name="action_forward">Forward</string>
     <string name="title_activity_browser">BrowserActivity</string>
     <string name="title_activity_speedometer">SpeedometerActivity</string>
+    <string name="title_activity_qrcode">QRCodeActivity</string>
 
 </resources>
