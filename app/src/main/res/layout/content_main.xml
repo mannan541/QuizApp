@@ -201,6 +201,14 @@
                 android:onClick="speedometerBtnClickListener"
                 android:text="Speedometer" />
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:onClick="aboutClickListener"
+                android:text="About App" />
+
         </LinearLayout>
 
     </ScrollView>
