@@ -25,8 +25,6 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.google.zxing.qrcode.encoder.QRCode;
-
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
@@ -277,6 +275,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void qrCodeClickListener(View view) {
         Intent intent = new Intent(getApplicationContext(), QRCodeActivity.class);
+        startActivity(intent);
+    }
+
+    public void compasClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), CompassActivity.class);
         startActivity(intent);
     }
 
