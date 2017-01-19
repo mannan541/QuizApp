@@ -21,6 +21,7 @@ android {
 }
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -41,4 +42,5 @@ dependencies {
     compile('com.mikepenz:aboutlibraries:5.9.1@aar') {
         transitive = true
     }
+    compile 'com.github.claudiodegio:MsvSearch:1.0.0'
 }

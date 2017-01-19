@@ -12,7 +12,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.android.quizapp.SpeedometerActivity"
+    tools:context="com.android.quizapp.activity.SpeedometerActivity"
     tools:showIn="@layout/activity_speedometer">
 
     <com.github.anastr.speedviewlib.AwesomeSpeedometer
