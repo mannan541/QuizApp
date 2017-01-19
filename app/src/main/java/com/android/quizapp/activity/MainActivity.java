@@ -305,6 +305,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void stopwatchClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), StopwatchActivity.class);
+        startActivity(intent);
+    }
+
 
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
 

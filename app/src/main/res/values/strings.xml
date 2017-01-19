@@ -79,5 +79,6 @@
     <string name="title_activity_compass">CompassActivity</string>
     <string name="search_hint">Search</string>
     <string name="title_activity_count_down">CountDownActivity</string>
+    <string name="stopwatch">Stop Watch</string>
 
 </resources>
