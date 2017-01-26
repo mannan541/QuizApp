@@ -80,5 +80,7 @@
     <string name="search_hint">Search</string>
     <string name="title_activity_count_down">CountDownActivity</string>
     <string name="stopwatch">Stop Watch</string>
+    <string name="title_activity_gesture_detector">GestureDetectorActivity</string>
+    <string name="title_activity_voice_recorder">VoiceRecorderActivity</string>
 
 </resources>

@@ -310,6 +310,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void gestureDetectorClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), GestureDetectorActivity.class);
+        startActivity(intent);
+    }
+
+    public void recorderClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), VoiceRecorderActivity.class);
+        startActivity(intent);
+    }
+
 
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
 

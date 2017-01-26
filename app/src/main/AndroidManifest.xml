@@ -15,6 +15,10 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".activity.MyApplication"
@@ -208,6 +212,24 @@
         <activity
             android:name=".activity.CountDownActivity"
             android:label="@string/title_activity_count_down"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.quizapp.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.GestureDetectorActivity"
+            android:label="@string/title_activity_gesture_detector"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.quizapp.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.VoiceRecorderActivity"
+            android:label="@string/title_activity_voice_recorder"
             android:parentActivityName=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
