@@ -236,6 +236,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.android.quizapp.activity.MainActivity" />
         </activity>
+        <activity
+            android:name=".activity.AltitudeActivity"
+            android:label="@string/title_activity_altitude"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.quizapp.activity.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
