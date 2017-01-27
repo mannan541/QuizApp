@@ -45,4 +45,5 @@ dependencies {
     compile 'com.github.claudiodegio:MsvSearch:1.0.0'
     compile 'com.github.nisrulz:sensey:1.5.1'
     compile 'com.github.adrielcafe:AndroidAudioRecorder:0.2.0'
+    compile 'com.github.ViksaaSkool:AwesomeSplash:v1.0.0'
 }
