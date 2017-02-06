@@ -83,5 +83,34 @@
     <string name="title_activity_gesture_detector">GestureDetectorActivity</string>
     <string name="title_activity_voice_recorder">VoiceRecorderActivity</string>
     <string name="title_activity_altitude">AltitudeActivity</string>
+    <string name="title_activity_nfc">NFCActivity</string>
+
+    <string name="repoUrl">https://github.com/pro100svitlo/Credit-Card-NFC-Reader#questions-and-help</string>
+    <string name="tv_noNfc">There is no NFC module on this device</string>
+    <string name="tv_tapYourCard">Please put your card to back panel of the phone</string>
+    <string name="ad_progressBar_title">Scanning ...</string>
+    <string name="ad_progressBar_mess">Please do not remove or move card during reading.</string>
+    <string name="snack_unknown_bank_card">This is unknown bank card. Please, go to my github repo!</string>
+    <string name="snack_doNotMoveCard">Please do not move card, try again !</string>
+    <string name="snack_unknownEmv">Unknown EMV card</string>
+    <string name="snack_lockedNfcCard">NFC is locked on this card.</string>
+    <string name="ad_nfcTurnOn_title">NFC is turned off.</string>
+    <string name="ad_nfcTurnOn_message">You need turn on NFC module for scanning. Wish turn on it now?</string>
+    <string name="ad_nfcTurnOn_pos">Turn on</string>
+    <string name="ad_nfcTurnOn_neg">Dismiss</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+
+  <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
+    cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
+    bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
+    cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
+    the big cheese.</string>
+    <string name="checkin">Checkin</string>
+    <string name="menu_settings">Settings</string>
+    <string name="prepaid_recharge">Prepaid Recharge</string>
+    <string name="enter_mobile_number">ENTER MOBILE NUMBER</string>
+    <string name="own_number">Own Number</string>
+    <string name="recent">Recent</string>
+    <string name="phone_number">9782145901</string>
 
 </resources>

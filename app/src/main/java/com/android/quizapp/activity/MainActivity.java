@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.android.quizapp.NFCActivity;
 import com.android.quizapp.utils.NetworkAccessInfo;
 import com.android.quizapp.R;
 import com.android.quizapp.models.User;
@@ -322,6 +323,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void altitudeClickListener(View view) {
         Intent intent = new Intent(getApplicationContext(), AltitudeActivity.class);
+        startActivity(intent);
+    }
+
+    public void nfcReaderClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), NFCActivity.class);
+        startActivity(intent);
+    }
+
+    public void scrollingClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), ScrollingActivity.class);
         startActivity(intent);
     }
 
