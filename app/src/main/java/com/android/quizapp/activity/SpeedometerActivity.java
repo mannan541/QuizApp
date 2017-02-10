@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.quizapp.R;
 import com.github.anastr.speedviewlib.AwesomeSpeedometer;
@@ -32,58 +33,63 @@ public class SpeedometerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_speedometer);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        fab();
+        try {
+            setContentView(R.layout.activity_speedometer);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            fab();
 
-        awesomeSpeedometer = (AwesomeSpeedometer) findViewById(R.id.awesomeSpeedometer);
-        seekBar = (SeekBar) findViewById(R.id.seekBar);
-        speedTo = (Button) findViewById(R.id.speedTo);
-        realSpeedTo = (Button) findViewById(R.id.realSpeedTo);
-        stop = (Button) findViewById(R.id.stop);
-        textSpeed = (TextView) findViewById(R.id.textSpeed);
+            awesomeSpeedometer = (AwesomeSpeedometer) findViewById(R.id.awesomeSpeedometer);
+            seekBar = (SeekBar) findViewById(R.id.seekBar);
+            speedTo = (Button) findViewById(R.id.speedTo);
+            realSpeedTo = (Button) findViewById(R.id.realSpeedTo);
+            stop = (Button) findViewById(R.id.stop);
+            textSpeed = (TextView) findViewById(R.id.textSpeed);
 
-        speedTo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                awesomeSpeedometer.speedTo(seekBar.getProgress());
-            }
-        });
+            speedTo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    awesomeSpeedometer.speedTo(seekBar.getProgress());
+                }
+            });
 
-        realSpeedTo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                awesomeSpeedometer.realSpeedTo(seekBar.getProgress());
-            }
-        });
+            realSpeedTo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    awesomeSpeedometer.realSpeedTo(seekBar.getProgress());
+                }
+            });
 
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                awesomeSpeedometer.stop();
-            }
-        });
+            stop.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    awesomeSpeedometer.stop();
+                }
+            });
 
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textSpeed.setText(String.format("%d", progress));
-            }
+            seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    textSpeed.setText(String.format("%d", progress));
+                }
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
 
-            }
+                }
 
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
 
-            }
-        });
+                }
+            });
 
-        checkInternetSpeed();
+            checkInternetSpeed();
+        } catch (Exception e) {
+            Toast.makeText(this, "" + e, Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     private void checkInternetSpeed() {

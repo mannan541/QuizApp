@@ -99,6 +99,7 @@
     <string name="ad_nfcTurnOn_pos">Turn on</string>
     <string name="ad_nfcTurnOn_neg">Dismiss</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="title_activity_heartbeat">HeartBeatView</string>
 
   <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
     cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
@@ -112,5 +113,8 @@
     <string name="own_number">Own Number</string>
     <string name="recent">Recent</string>
     <string name="phone_number">9782145901</string>
+
+    <string name="action_info">Info</string>
+    <string name="info_details">Open source custom view of a beating heart using scaling animation.</string>
 
 </resources>
