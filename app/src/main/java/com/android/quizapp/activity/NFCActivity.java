@@ -1,4 +1,4 @@
-package com.android.quizapp;
+package com.android.quizapp.activity;
 
 
 import android.app.ProgressDialog;
@@ -12,11 +12,13 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.quizapp.R;
 import com.pro100svitlo.creditCardNfcReader.CardNfcAsyncTask;
 import com.pro100svitlo.creditCardNfcReader.utils.CardNfcUtils;
 
@@ -43,7 +45,7 @@ public class NFCActivity extends AppCompatActivity implements CardNfcAsyncTask.C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfc);
-         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -125,6 +127,11 @@ public class NFCActivity extends AppCompatActivity implements CardNfcAsyncTask.C
 
     @Override
     public void unknownEmvCard() {
+        Log.d("myNfc", mCardNfcAsyncTask.getStatus() + ","
+                + mCardNfcAsyncTask.getCardType() + ", "
+                + mCardNfcAsyncTask.getCardNumber() + ", "
+                + mCardNfcAsyncTask.getCardExpireDate()
+        );
         showSnackBar(mUnknownEmvCardMessage);
     }
 

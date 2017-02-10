@@ -247,7 +247,7 @@
                 android:value="com.android.quizapp.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".NFCActivity"
+            android:name=".activity.NFCActivity"
             android:label="@string/title_activity_nfc"
             android:parentActivityName=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

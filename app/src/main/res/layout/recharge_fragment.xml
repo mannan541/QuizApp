@@ -1,66 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="fill_vertical"
     android:fillViewport="true"
     android:fitsSystemWindows="true"
-    android:layout_gravity="fill_vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:background="#DDD"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#DDD"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="16dp">
+
             <ImageView
-                android:src="@drawable/mobile"
-                android:layout_marginTop="2dp"
                 android:layout_width="16dp"
-                android:layout_height="16dp" />
+                android:layout_height="16dp"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/mobile" />
+
             <TextView
-                android:text="@string/prepaid_recharge"
-                android:layout_marginStart="16dp"
-                android:layout_gravity="center_vertical"
-                android:textColor="#000"
-                android:fontFamily="sans-serif-medium"
-                android:textSize="14sp"
-                android:textAllCaps="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/prepaid_recharge"
+                android:textAllCaps="true"
+                android:textColor="#000"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
+            android:layout_height="88dp"
             android:background="#FFF"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="16dp"
             android:paddingBottom="32dp"
-            android:layout_height="88dp">
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp">
+
             <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="#DDD"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
                 android:drawableStart="@drawable/mobile_grey"
                 android:hint="@string/enter_mobile_number"
-                android:textColorHint="#bdc3c7"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:textColorHint="#bdc3c7" />
+
             <ImageView
-                android:background="#FFF"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_gravity="center_vertical|end"
                 android:layout_marginEnd="8dp"
-                android:src="@drawable/contact"
-                android:layout_width="24dp"
-                android:layout_height="24dp" />
+                android:background="#FFF"
+                android:src="@drawable/contact" />
         </FrameLayout>
 
         <LinearLayout
@@ -68,56 +71,61 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="16dp">
+
             <ImageView
-                android:src="@drawable/mobile"
-                android:layout_marginTop="2dp"
                 android:layout_width="16dp"
-                android:layout_height="16dp" />
+                android:layout_height="16dp"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/mobile" />
+
             <TextView
-                android:text="@string/own_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="16dp"
                 android:fontFamily="sans-serif-medium"
-                android:layout_gravity="center_vertical"
-                android:textColor="#000"
-                android:textSize="14sp"
+                android:text="@string/own_number"
                 android:textAllCaps="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textColor="#000"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:background="#FFF"
+            android:gravity="center"
             android:text="@string/phone_number"
             android:textColor="#000"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:background="#FFF"
-            android:layout_width="match_parent"
-            android:layout_height="88dp"/>
+            android:textSize="18sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="16dp">
+
             <ImageView
-                android:src="@drawable/recent"
-                android:layout_marginTop="2dp"
                 android:layout_width="16dp"
-                android:layout_height="16dp" />
+                android:layout_height="16dp"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/recent" />
+
             <TextView
-                android:text="@string/recent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="16dp"
                 android:fontFamily="sans-serif-medium"
-                android:layout_gravity="center_vertical"
-                android:textColor="#000"
-                android:textSize="14sp"
+                android:text="@string/recent"
                 android:textAllCaps="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textColor="#000"
+                android:textSize="14sp" />
         </LinearLayout>
+
         <ListView
             android:id="@+id/recent_recharge_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

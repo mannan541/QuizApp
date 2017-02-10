@@ -25,7 +25,6 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.android.quizapp.NFCActivity;
 import com.android.quizapp.utils.NetworkAccessInfo;
 import com.android.quizapp.R;
 import com.android.quizapp.models.User;
