@@ -14,9 +14,10 @@ import android.view.ViewStub;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.alexfu.countdownview.R;
-import com.alexfu.countdownview.core.TimerService;
 import com.alexfu.countdownview.core.TimerListener;
+import com.alexfu.countdownview.core.TimerService;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;

@@ -20,6 +20,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
     <application
         android:name=".activity.MyApplication"
@@ -277,6 +278,15 @@
         <activity
             android:name=".activity.HeartBeatActivity"
             android:label="@string/title_activity_heartbeat"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.quizapp.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.FingerprintActivity"
+            android:label="@string/title_activity_fingerprint"
             android:parentActivityName=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

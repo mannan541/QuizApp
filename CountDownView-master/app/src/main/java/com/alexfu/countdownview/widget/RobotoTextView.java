@@ -22,6 +22,7 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.widget.TextView;
+
 import com.alexfu.countdownview.R;
 
 /**
