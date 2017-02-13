@@ -49,14 +49,16 @@
                     android:id="@+id/toggleHeart1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:onClick="heart1onClick"
                     android:textOff="Start"
                     android:textOn="Stop" />
 
                 <com.android.quizapp.view.HeartBeatView
                     android:id="@+id/heartbeat"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp" />
+                    android:layout_width="82dp"
+                    android:layout_height="82dp"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin" />
 
             </LinearLayout>
 
@@ -77,16 +79,17 @@
                     android:id="@+id/toggleHeart2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:buttonTint="@android:color/holo_blue_bright"
                     android:onClick="heart2onClick"
                     android:textOff="Start"
-                    android:textOn="Stop"
-                    app:buttonTint="@android:color/holo_blue_bright" />
+                    android:textOn="Stop" />
 
                 <com.android.quizapp.view.HeartBeatView
                     android:id="@+id/heartbeat2"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:tint="@android:color/holo_blue_bright"
+                    android:layout_width="82dp"
+                    android:layout_height="82dp"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     app:duration="100" />
 
             </LinearLayout>
@@ -123,14 +126,18 @@
                     android:id="@+id/toggleHeart3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:onClick="heart3onClick"
                     android:textOff="Start"
                     android:textOn="Stop" />
 
                 <com.android.quizapp.view.HeartBeatView
                     android:id="@+id/heartbeat3"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
+                    android:layout_width="82dp"
+                    android:layout_height="82dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:tint="@color/colorPrimary"
                     app:scaleFactor="0.5" />
 
             </LinearLayout>
