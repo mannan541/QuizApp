@@ -345,6 +345,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void FirebaseClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), FireBaseNotificationActivity.class);
+        startActivity(intent);
+    }
+
 
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
 
