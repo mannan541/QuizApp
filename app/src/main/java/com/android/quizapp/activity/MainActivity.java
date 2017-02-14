@@ -25,11 +25,12 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.android.quizapp.utils.NetworkAccessInfo;
 import com.android.quizapp.R;
 import com.android.quizapp.models.User;
+import com.android.quizapp.utils.NetworkAccessInfo;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
+import com.vansuita.library.CheckNewAppVersion;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -39,8 +40,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.util.List;
 
+import iammert.com.library.ConnectionStatusView;
+import iammert.com.library.Status;
+
 public class MainActivity extends AppCompatActivity {
 
+    ConnectionStatusView statusView;
     EditText edit_text;
     String editTextInputString = "Dummy Content";
     Button led_on_off;
@@ -66,10 +71,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        statusView = (ConnectionStatusView) findViewById(R.id.statusView);
         edit_text = (EditText) findViewById(R.id.edit_text);
         led_on_off = (Button) findViewById(R.id.led_on_off);
         ledSwitch = (Switch) findViewById(R.id.ledSwitch);
         ledSwitchListener();
+
+        new CheckNewAppVersion(getApplicationContext()).setOnTaskCompleteListener(new CheckNewAppVersion.ITaskComplete() {
+            @Override
+            public void onTaskComplete(CheckNewAppVersion.Result result) {
+
+                //Checks if there is a new version available on Google Play Store.
+                result.hasNewVersion();
+
+                //Get the new published version code of the app.
+                result.getNewVersionCode();
+
+                //Get the app current version code.
+                result.getOldVersionCode();
+
+                //Opens the Google Play Store on your app page to do the update.
+//                result.openUpdateLink();
+            }
+        }).execute();
     }
 
     @Override
@@ -148,9 +172,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void checkInternetClickListener(View view) {
         if (NetworkAccessInfo.isNetworkAvailable(getApplicationContext())) {
-            Toast.makeText(this, "Internet Connected", Toast.LENGTH_SHORT).show();
+//            statusView.setStatus(Status.LOADING);
+//            statusView.setStatus(Status.ERROR);
+            statusView.setStatus(Status.COMPLETE);
+//            statusView.setStatus(Status.IDLE); //hide status
         } else {
-            Toast.makeText(this, "Internet Not Connected", Toast.LENGTH_SHORT).show();
+//            statusView.setStatus(Status.LOADING);
+            statusView.setStatus(Status.ERROR);
+//            statusView.setStatus(Status.COMPLETE);
+//            statusView.setStatus(Status.IDLE); //hide status
         }
     }
 
