@@ -71,6 +71,12 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="screenShotClickListener"
+                android:text="Screen Capture" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:onClick="FirebaseClickListener"
                 android:text="FireBase Notification" />
 

@@ -317,6 +317,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.android.quizapp.activity.MainActivity" />
         </activity>
+        <activity
+            android:name=".activity.ScreenCaptureActivity"
+            android:label="@string/title_activity_screen_capture"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.quizapp.activity.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

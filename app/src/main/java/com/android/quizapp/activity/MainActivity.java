@@ -324,6 +324,7 @@ public class MainActivity extends AppCompatActivity {
                 //provide a style (optional) (LIGHT, DARK, LIGHT_DARK_TOOLBAR)
                 .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
                 .withAboutIconShown(true)
+                .withActivityTitle("About App")
                 .withAboutVersionShown(true)
                 .withAboutDescription("This is a small sample which can be set in the about my app description file.<br /><b>You can style this with html markup :D</b>")
                 //start the activity
@@ -377,6 +378,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void FirebaseClickListener(View view) {
         Intent intent = new Intent(getApplicationContext(), FireBaseNotificationActivity.class);
+        startActivity(intent);
+    }
+
+    public void screenShotClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), ScreenCaptureActivity.class);
         startActivity(intent);
     }
 

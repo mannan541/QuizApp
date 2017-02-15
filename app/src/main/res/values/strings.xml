@@ -126,5 +126,6 @@
     <string name="activity_home_note">Close and re-open the app to see the fingerprint auth screen again</string>
     <string name="title_activity_fire_base_notification">FireBaseNotificationActivity</string>
     <string name="title_activity_timeline">TimelineActivity</string>
+    <string name="title_activity_screen_capture">ScreenCaptureActivity</string>
 
 </resources>
