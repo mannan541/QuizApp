@@ -52,7 +52,7 @@ public class ScreenCaptureActivity extends AppCompatActivity {
                 Bitmap bitmap_hiddenview = ScreenShott.getInstance().takeScreenShotOfJustView(view);
 
                 ScreenShott.getInstance().saveScreenshotToPicturesFolder(getApplicationContext(),
-                        bitmap_hiddenview, "my_screenshot_filename");
+                        bitmap_rootview, "my_screenshot_filename");
 
             }
         });

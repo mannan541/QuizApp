@@ -386,6 +386,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void weatherClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), WeatherActivity.class);
+        startActivity(intent);
+    }
+
 
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
 
