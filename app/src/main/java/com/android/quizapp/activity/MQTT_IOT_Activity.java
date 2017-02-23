@@ -41,10 +41,9 @@ public class MQTT_IOT_Activity extends AppCompatActivity {
     private TextInputLayout topicInputWrapper;
     AppCompatButton submitBtn;
 
-    //    String brokerURL = "tcp://vmachine99.cloudapp.net:1883";
     String brokerURL = "tcp://broker.hivemq.com";
     String port = "1883";
-    String payloadMessage = "DeviceState -id 8200179139 -s ON";
+    String payloadMessage = "ON";
     int qos = 0;
     String topic = "a/b";
     String userName = "testUser";
