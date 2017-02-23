@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "1123407079",
-    "firebase_url": "https://custom-range-138423.firebaseio.com",
-    "project_id": "custom-range-138423",
-    "storage_bucket": "custom-range-138423.appspot.com"
+    "project_number": "159648627053",
+    "firebase_url": "https://android-tutorial-app-c08c1.firebaseio.com",
+    "project_id": "android-tutorial-app-c08c1",
+    "storage_bucket": "android-tutorial-app-c08c1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1123407079:android:a9a1091acce0c263",
+        "mobilesdk_app_id": "1:159648627053:android:5761c8ddc62af822",
         "android_client_info": {
-          "package_name": "com.android.quizapp"
+          "package_name": "com.android.tutorial"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1123407079-n5bcle2r70fd534j7eomm02h8no3q8is.apps.googleusercontent.com",
+          "client_id": "159648627053-oia806dutmhced7kqlbehn8sl6qjn14t.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAWDlR-9c_xx9lDZDdXvY_zkSOrd8dk0rM"
+          "current_key": "AIzaSyDGCXBDkuGAfXW2-X02auUf5SGYCL5Q-kg"
         }
       ],
       "services": {

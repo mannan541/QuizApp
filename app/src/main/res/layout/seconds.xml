@@ -7,14 +7,14 @@
     android:layout_height="match_parent"
     android:paddingRight="@dimen/unit_spacing">
 
-    <com.android.quizapp.view.RobotoTextView
+    <com.android.tutorial.view.RobotoTextView
         android:id="@+id/seconds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="60dp"
         font:typeface="roboto_thin"/>
 
-    <com.android.quizapp.view.RobotoTextView
+    <com.android.tutorial.view.RobotoTextView
         android:id="@+id/seconds_unit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

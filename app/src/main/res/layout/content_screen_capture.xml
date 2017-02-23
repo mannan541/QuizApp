@@ -12,7 +12,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:weightSum="6"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.android.quizapp.activity.ScreenCaptureActivity"
+    tools:context="com.android.tutorial.com.android.tutorial.activity.ScreenCaptureActivity"
     tools:showIn="@layout/activity_screen_capture">
 
     <ImageView

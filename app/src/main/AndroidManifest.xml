@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.quizapp">
-
-    <!-- To access Google+ APIs: -->
-    <uses-permission android:name="android.permission.INTERNET" />
+    package="com.android.tutorial">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -25,7 +22,7 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
-        android:name=".activity.MyApplication"
+        android:name="com.android.tutorial.activity.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -42,18 +39,18 @@
             android:value="true" />
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
-            android:value="com.android.quizapp" />
+            android:value="com.android.tutorial" />
 
-        <service android:name=".services.TimerService" />
-        <service android:name=".services.StopwatchService" />
+        <service android:name="com.android.tutorial.services.TimerService" />
+        <service android:name="com.android.tutorial.services.StopwatchService" />
 
         <!-- Firebase Notifications -->
-        <service android:name=".firebase.MyFirebaseMessagingService">
+        <service android:name="com.android.tutorial.firebase.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".firebase.MyFirebaseInstanceIDService">
+        <service android:name="com.android.tutorial.firebase.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
@@ -61,7 +58,7 @@
         <!-- ./Firebase Notifications -->
 
         <activity
-            android:name=".activity.SplashActivity"
+            android:name="com.android.tutorial.activity.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -72,204 +69,204 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.WelcomeActivity"
+            android:name="com.android.tutorial.activity.WelcomeActivity"
             android:theme="@style/MyAppTheme" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.android.tutorial.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.CalculatorActivity"
+            android:name="com.android.tutorial.activity.CalculatorActivity"
             android:label="@string/title_activity_calculator"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.SignatureActivity"
+            android:name="com.android.tutorial.activity.SignatureActivity"
             android:label="@string/title_activity_signature"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.StopwatchActivity"
+            android:name="com.android.tutorial.activity.StopwatchActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/stopwatch"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.ListActivity"
+            android:name="com.android.tutorial.activity.ListActivity"
             android:label="@string/title_activity_list"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.GridActivity"
+            android:name="com.android.tutorial.activity.GridActivity"
             android:label="@string/title_activity_grid"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.LoginActivity"
+            android:name="com.android.tutorial.activity.LoginActivity"
             android:label="@string/title_activity_login"
-            android:parentActivityName=".activity.MainActivity">
+            android:parentActivityName="com.android.tutorial.activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.NavigationDrawerActivity"
+            android:name="com.android.tutorial.activity.NavigationDrawerActivity"
             android:label="@string/title_activity_navigation_drawer"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.LedControllActivity"
+            android:name="com.android.tutorial.activity.LedControllActivity"
             android:label="@string/title_activity_led_controll"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.WebVeiwActivity"
+            android:name="com.android.tutorial.activity.WebVeiwActivity"
             android:label="@string/title_activity_web_veiw"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.PhoneCallActivity"
+            android:name="com.android.tutorial.activity.PhoneCallActivity"
             android:label="@string/title_activity_phone_call"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.ProfileActivity"
+            android:name="com.android.tutorial.activity.ProfileActivity"
             android:label="@string/title_activity_profile"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.WebViewInAppBrowserActivity"
+            android:name="com.android.tutorial.activity.WebViewInAppBrowserActivity"
             android:label="@string/title_activity_web_view_in_app_browser"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.BrowserActivity"
+            android:name="com.android.tutorial.activity.BrowserActivity"
             android:label="@string/title_activity_browser"
-            android:parentActivityName=".activity.WebViewInAppBrowserActivity"
+            android:parentActivityName="com.android.tutorial.activity.WebViewInAppBrowserActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.WebViewInAppBrowserActivity" />
+                android:value="com.android.tutorial.activity.WebViewInAppBrowserActivity" />
         </activity>
         <activity
-            android:name=".activity.SpeedometerActivity"
+            android:name="com.android.tutorial.activity.SpeedometerActivity"
             android:label="@string/title_activity_speedometer"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.QRCodeActivity"
+            android:name="com.android.tutorial.activity.QRCodeActivity"
             android:label="@string/title_activity_qrcode"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.CompassActivity"
+            android:name="com.android.tutorial.activity.CompassActivity"
             android:label="@string/title_activity_compass"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
 
-        <service android:name=".services.TimerService" />
+        <service android:name="com.android.tutorial.services.TimerService" />
 
         <activity
-            android:name=".activity.CountDownActivity"
+            android:name="com.android.tutorial.activity.CountDownActivity"
             android:label="@string/title_activity_count_down"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.GestureDetectorActivity"
+            android:name="com.android.tutorial.activity.GestureDetectorActivity"
             android:label="@string/title_activity_gesture_detector"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.VoiceRecorderActivity"
+            android:name="com.android.tutorial.activity.VoiceRecorderActivity"
             android:label="@string/title_activity_voice_recorder"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.AltitudeActivity"
+            android:name="com.android.tutorial.activity.AltitudeActivity"
             android:label="@string/title_activity_altitude"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.NFCActivity"
+            android:name="com.android.tutorial.activity.NFCActivity"
             android:label="@string/title_activity_nfc"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
 
             <intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
@@ -282,67 +279,67 @@
                 android:resource="@xml/nfc_tech_filter" />
         </activity>
         <activity
-            android:name=".activity.ScrollingActivity"
+            android:name="com.android.tutorial.activity.ScrollingActivity"
             android:label="@string/title_activity_scrolling"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.HeartBeatActivity"
+            android:name="com.android.tutorial.activity.HeartBeatActivity"
             android:label="@string/title_activity_heartbeat"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.FingerprintActivity"
+            android:name="com.android.tutorial.activity.FingerprintActivity"
             android:label="@string/title_activity_fingerprint"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.FireBaseNotificationActivity"
+            android:name="com.android.tutorial.activity.FireBaseNotificationActivity"
             android:label="@string/title_activity_fire_base_notification"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.ScreenCaptureActivity"
+            android:name="com.android.tutorial.activity.ScreenCaptureActivity"
             android:label="@string/title_activity_screen_capture"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.WeatherActivity"
+            android:name="com.android.tutorial.activity.WeatherActivity"
             android:label="@string/title_activity_weather"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.MQTT_IOT_Activity"
+            android:name="com.android.tutorial.activity.MQTT_IOT_Activity"
             android:label="@string/title_activity_mqtt__iot_"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.android.tutorial.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.quizapp.activity.MainActivity" />
+                android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
     </application>
 
