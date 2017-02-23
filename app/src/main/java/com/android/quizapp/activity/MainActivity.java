@@ -391,6 +391,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void mqttIOTClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), MQTT_IOT_Activity.class);
+        startActivity(intent);
+    }
+
 
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
 

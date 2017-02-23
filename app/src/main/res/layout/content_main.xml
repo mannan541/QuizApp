@@ -71,6 +71,12 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="mqttIOTClickListener"
+                android:text="MQTT IOT" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:onClick="weatherClickListener"
                 android:text="Weather Details" />
 
