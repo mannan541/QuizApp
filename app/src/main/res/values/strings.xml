@@ -129,5 +129,6 @@
     <string name="title_activity_screen_capture">ScreenCaptureActivity</string>
     <string name="title_activity_weather">WeatherActivity</string>
     <string name="title_activity_mqtt__iot_">MQTT_IOT_Activity</string>
+    <string name="title_activity_login_signup">Login Signup</string>
 
 </resources>

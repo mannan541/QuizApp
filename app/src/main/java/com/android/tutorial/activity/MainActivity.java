@@ -396,6 +396,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void loginSignupClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), LoginSignupActivity.class);
+        startActivity(intent);
+    }
+
 
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
 
