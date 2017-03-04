@@ -49,16 +49,9 @@ public class TodoActivity extends AppCompatActivity implements BatListener, OnIt
 
         mRecyclerView.getView().setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.getView().setAdapter(mAdapter = new BatAdapter(mGoals = new ArrayList<BatModel>() {{
-            add(new Goal("first"));
-            add(new Goal("second"));
-            add(new Goal("third"));
-            add(new Goal("fourth"));
-            add(new Goal("fifth"));
-            add(new Goal("sixth"));
-            add(new Goal("seventh"));
-            add(new Goal("eighth"));
-            add(new Goal("ninth"));
-            add(new Goal("tenth"));
+            for (int i = 1; i <= 10; i++) {
+                add(new Goal("Task " + i));
+            }
         }}, this, mAnimator).setOnItemClickListener(this).setOnOutsideClickListener(this));
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new BatCallback(this));
