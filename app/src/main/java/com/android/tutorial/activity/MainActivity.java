@@ -401,6 +401,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void todoClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), TodoActivity.class);
+        startActivity(intent);
+    }
+
 
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
 

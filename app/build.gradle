@@ -60,4 +60,7 @@ dependencies {
 
     compile 'com.google.firebase:firebase-core:9.6.0' // firebase library
     compile 'com.google.firebase:firebase-messaging:9.6.0'// firebase push notifications library
+
+    compile 'com.github.yalantis:todolist:v1.0.1' // to do list library
+
 }

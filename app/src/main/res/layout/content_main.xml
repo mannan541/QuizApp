@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.android.tutorial.com.android.tutorial.activity.MainActivity"
+    tools:context=".activity.MainActivity"
     tools:showIn="@layout/activity_main">
 
     <iammert.com.library.ConnectionStatusView
@@ -67,6 +67,12 @@
                     android:gravity="center"
                     android:paddingRight="6dp" />
             </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="todoClickListener"
+                android:text="Todo List" />
 
             <Button
                 android:layout_width="match_parent"
