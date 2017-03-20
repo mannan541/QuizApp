@@ -71,6 +71,12 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="cardFormClickListener"
+                android:text="Card Form" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:onClick="todoClickListener"
                 android:text="Todo List" />
 

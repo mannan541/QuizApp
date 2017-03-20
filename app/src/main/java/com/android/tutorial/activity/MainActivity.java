@@ -406,6 +406,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void cardFormClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), CardFormActivity.class);
+        startActivity(intent);
+    }
+
 
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
 
