@@ -30,6 +30,12 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile('com.mikepenz:aboutlibraries:5.9.1@aar') { // library to view used libraries in app.
+        transitive = true
+    }
+    compile('org.eclipse.paho:org.eclipse.paho.android.service:1.0.2') { // mqtt iot library
+        exclude module: 'support-v4'
+    }
     // Cardview library
     // SignaturePadView library
     //http library
@@ -37,9 +43,6 @@ dependencies {
     // glide library to load online image in imageview
     // Speedometer library
     //  QR code reader library
-    compile('com.mikepenz:aboutlibraries:5.9.1@aar') { // library to view used libraries in app.
-        transitive = true
-    }
     // SearchView library
     // Motion sensor library
     // Audio recorder library
@@ -49,19 +52,16 @@ dependencies {
     // check new app version  on playstore library
     // status bar /  snackbar library
     // screenshot library
-    compile('org.eclipse.paho:org.eclipse.paho.android.service:1.0.2') { // mqtt iot library
-        exclude module: 'support-v4'
-    }
-
-    // firebase library
-    // firebase push notifications library
-
+    //firebase
+    //firebase push notifications
     // to do list library
+    // card form view with validation
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
     compile 'com.android.support:support-v4:24.2.1'
-    compile 'com.android.support:percent:24.2.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.1'
     compile 'com.android.support:cardview-v7:24.2.1'
+    compile 'com.android.support:percent:24.2.1'
     compile 'com.github.gcacace:signature-pad:1.2.0'
     compile 'org.apache.httpcomponents:httpclient:4.5'
     compile 'com.github.satyan:sugar:1.4'
@@ -81,6 +81,5 @@ dependencies {
     compile 'com.google.firebase:firebase-messaging:9.6.0'
     compile 'com.github.yalantis:todolist:v1.0.1'
     compile 'com.craftman.cardform:cardform:0.0.2'
-    compile 'com.android.support.constraint:constraint-layout:1.0.1'
     testCompile 'junit:junit:4.12'
 }

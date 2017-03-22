@@ -71,6 +71,12 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="apkExtractClickListener"
+                android:text="APK Extractor" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:onClick="cardFormClickListener"
                 android:text="Card Form" />
 
