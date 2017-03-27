@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -11,8 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +43,7 @@ public class APKExtractActivity extends AppCompatActivity {
     List<AppAPK> apkArrayList;
     MaterialSearchView searchView;
     APKAppAdapter adapter;
+    ProgressBar progressWheel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,52 +53,21 @@ public class APKExtractActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        initializeViews();
+        titleTextView.setText(R.string.title_activity_apkextract);
+
+        new MyAPKListAsyncTask().execute();
+
+        searchBarListener();
+    }
+
+    private void initializeViews() {
         listView = (ListView) findViewById(R.id.apkListView);
         apkArrayList = new ArrayList<AppAPK>();
         titleTextView = (TextView) findViewById(R.id.aplListViewTitle);
         inputSearch = (EditText) findViewById(R.id.apkInputSearch);
         searchView = (MaterialSearchView) findViewById(R.id.apkListSearchView);
-
-        titleTextView.setText(R.string.title_activity_apkextract);
-
-//        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-//        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-//        List<ResolveInfo> pkgAppsList = getPackageManager().queryIntentActivities(mainIntent, 0);
-        final PackageManager pm = getPackageManager();
-        //get a list of installed apps.
-        List<ApplicationInfo> applicationInfoList = pm.getInstalledApplications(PackageManager.GET_META_DATA);
-
-        getApkAppsList();
-        adapter = new APKAppAdapter(APKExtractActivity.this, apkArrayList, new APKSelectListener() {
-            @Override
-            public void onAPKClick(AppAPK appAPK) {
-                Toast.makeText(APKExtractActivity.this, appAPK.getAppPackage(), Toast.LENGTH_SHORT).show();
-                getApkFiles(appAPK);
-            }
-        });
-        listView.setAdapter(adapter);
-
-        inputSearch.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-                // When user changed the Text
-                APKExtractActivity.this.adapter.getFilter().filter(cs);
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-                                          int arg3) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable arg0) {
-                // TODO Auto-generated method stub
-            }
-        });
-
+        progressWheel = (ProgressBar) findViewById(R.id.apkProgressView);
     }
 
     public void getApkAppsList() {
@@ -161,6 +134,113 @@ public class APKExtractActivity extends AppCompatActivity {
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
+        }
+    }
+
+    private void searchBarListener() {
+        inputSearch.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                // When user changed the Text
+                APKExtractActivity.this.adapter.getFilter().filter(cs);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
+    }
+
+    private class MyAPKListAsyncTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            listView.setVisibility(View.GONE);
+            progressWheel.setVisibility(View.VISIBLE);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            getApkAppsList();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            //        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+//        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+//        List<ResolveInfo> pkgAppsList = getPackageManager().queryIntentActivities(mainIntent, 0);
+            final PackageManager pm = getPackageManager();
+            //get a list of installed apps.
+            List<ApplicationInfo> applicationInfoList = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+
+            adapter = new APKAppAdapter(APKExtractActivity.this, apkArrayList, new APKSelectListener() {
+                @Override
+                public void onAPKClick(AppAPK appAPK) {
+                    Toast.makeText(APKExtractActivity.this, appAPK.getAppPackage(), Toast.LENGTH_SHORT).show();
+                    getApkFiles(appAPK);
+                }
+            });
+            listView.setAdapter(adapter);
+
+            listView.setVisibility(View.VISIBLE);
+            progressWheel.setVisibility(View.GONE);
+
+        }
+    }
+
+    private class MyAPKExtractAsyncTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressWheel.setVisibility(View.VISIBLE);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            getApkAppsList();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            //        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+//        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+//        List<ResolveInfo> pkgAppsList = getPackageManager().queryIntentActivities(mainIntent, 0);
+            final PackageManager pm = getPackageManager();
+            //get a list of installed apps.
+            List<ApplicationInfo> applicationInfoList = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+
+            adapter = new APKAppAdapter(APKExtractActivity.this, apkArrayList, new APKSelectListener() {
+                @Override
+                public void onAPKClick(AppAPK appAPK) {
+                    Toast.makeText(APKExtractActivity.this, appAPK.getAppPackage(), Toast.LENGTH_SHORT).show();
+                    getApkFiles(appAPK);
+                }
+            });
+            listView.setAdapter(adapter);
+
+            progressWheel.setVisibility(View.GONE);
+
         }
     }
 

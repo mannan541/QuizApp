@@ -31,6 +31,14 @@
             android:hint="Search Apk..."
             android:inputType="textVisiblePassword" />
 
+        <ProgressBar
+            android:id="@+id/apkProgressView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:layout_gravity="center"
+            android:entries="@array/list_items" />
+
         <ListView
             android:id="@+id/apkListView"
             android:layout_width="match_parent"

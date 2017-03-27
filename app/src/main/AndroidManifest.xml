@@ -371,6 +371,7 @@
         <activity
             android:name=".activity.APKExtractActivity"
             android:label="@string/title_activity_apkextract"
+            android:configChanges="keyboardHidden|orientation"
             android:parentActivityName=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
