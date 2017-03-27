@@ -133,5 +133,6 @@
     <string name="todo">Todo List</string>
     <string name="title_activity_card_form">CardFormActivity</string>
     <string name="title_activity_apkextract">APKExtractActivity</string>
+    <string name="title_activity_accelerometer_play">AccelerometerPlayActivity</string>
 
 </resources>

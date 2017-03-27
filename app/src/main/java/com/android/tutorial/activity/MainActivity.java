@@ -416,6 +416,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void accelerometerClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), AccelerometerPlayActivity.class);
+        startActivity(intent);
+    }
 
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
 
