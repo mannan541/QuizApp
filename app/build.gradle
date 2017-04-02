@@ -36,26 +36,6 @@ dependencies {
     compile('org.eclipse.paho:org.eclipse.paho.android.service:1.0.2') { // mqtt iot library
         exclude module: 'support-v4'
     }
-    // Cardview library
-    // SignaturePadView library
-    //http library
-    // Sugrar ORM library for SQLite database wrapper
-    // glide library to load online image in imageview
-    // Speedometer library
-    //  QR code reader library
-    // SearchView library
-    // Motion sensor library
-    // Audio recorder library
-    // Splash Screen library
-    // NFC card reader library
-    // circular image view library
-    // check new app version  on playstore library
-    // status bar /  snackbar library
-    // screenshot library
-    //firebase
-    //firebase push notifications
-    // to do list library
-    // card form view with validation
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
     compile 'com.android.support:support-v4:24.2.1'
@@ -81,5 +61,8 @@ dependencies {
     compile 'com.google.firebase:firebase-messaging:9.6.0'
     compile 'com.github.yalantis:todolist:v1.0.1'
     compile 'com.craftman.cardform:cardform:0.0.2'
+    compile 'com.github.SandroMachado:openalpr-android:1.1.2'
     testCompile 'junit:junit:4.12'
+    compile 'com.google.code.gson:gson:2.5'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

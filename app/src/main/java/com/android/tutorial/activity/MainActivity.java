@@ -421,6 +421,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void ocrClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), OCR_RecognitionActivity.class);
+        startActivity(intent);
+    }
+
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
 
         @Override

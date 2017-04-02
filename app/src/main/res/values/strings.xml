@@ -134,5 +134,7 @@
     <string name="title_activity_card_form">CardFormActivity</string>
     <string name="title_activity_apkextract">APKExtractActivity</string>
     <string name="title_activity_accelerometer_play">AccelerometerPlayActivity</string>
+    <string name="title_activity_bar_code_reader">BarCodeReaderActivity</string>
+    <string name="title_activity_ocr__recognition">OCR_RecognitionActivity</string>
 
 </resources>
