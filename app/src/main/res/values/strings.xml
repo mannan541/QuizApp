@@ -65,7 +65,7 @@
     <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_led_controll">LedControllActivity</string>
-    <string name="title_activity_web_veiw">WebVeiwActivity</string>
+    <string name="title_activity_web_veiw">GIF Animation</string>
     <string name="title_activity_phone_call">PhoneCallActivity</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_maps">Map</string>
@@ -137,5 +137,9 @@
     <string name="title_activity_bar_code_reader">BarCodeReaderActivity</string>
     <string name="title_activity_ocr__recognition">OCR_RecognitionActivity</string>
     <string name="title_activity_color_picker">ColorPickerActivity</string>
+    <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>

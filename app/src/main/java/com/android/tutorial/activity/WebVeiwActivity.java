@@ -7,10 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import com.android.tutorial.R;
 
+// for displaying gif animation
 public class WebVeiwActivity extends AppCompatActivity {
 
     WebView webView;
@@ -34,9 +34,22 @@ public class WebVeiwActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         webView = (WebView) findViewById(R.id.web_view);
-        webView.setWebViewClient(new WebViewClient());
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl("http://soundcloud.com/");
+//        webView.setWebViewClient(new WebViewClient());
+//        webView.getSettings().setJavaScriptEnabled(true);
+//        webView.loadUrl("http://soundcloud.com/");
+
+//        webView.setBackgroundColor(Color.TRANSPARENT); //for gif without background
+        webView.loadUrl("file:///android_asset/myanimation.gif");
+//
+        String gifName = "myanimation.gif";
+        String yourData = "<html style=\"margin: 0;\">\n" +
+                "    <body style=\"margin: 0;\">\n" +
+                "    <img src=" + gifName + " style=\"width: 100%; height: 100%\" />\n" +
+                "    </body>\n" +
+                "    </html>";
+
+//        webView.loadData(yourData, "text/html; charset=utf-8", "UTF-8");
+
     }
 
 }
