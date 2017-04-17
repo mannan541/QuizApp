@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 public class LedControllActivity extends AppCompatActivity {
 
     TextView led_on_off;
+    EditText ipEditText;
     Switch ledSwitch;
     String bit = "OFF";
     String SetServerString = "";
@@ -34,6 +36,7 @@ public class LedControllActivity extends AppCompatActivity {
         setContentView(R.layout.activity_led_controll);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -43,9 +46,9 @@ public class LedControllActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         led_on_off = (TextView) findViewById(R.id.led_on_off);
+        ipEditText = (EditText) findViewById(R.id.ipEditText);
         ledSwitch = (Switch) findViewById(R.id.ledSwitch);
         ledSwitchListener();
 
@@ -58,7 +61,7 @@ public class LedControllActivity extends AppCompatActivity {
                 if (NetworkAccessInfo.isNetworkAvailable(getApplicationContext())) {
                     new MyAsyncTask().execute();
                 } else {
-                    Toast.makeText(LedControllActivity.this, "Internet Not Connected", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LedControllActivity.this, "Internet Not Connected.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -102,7 +105,8 @@ public class LedControllActivity extends AppCompatActivity {
 
     public void http_get_request(String bit) {
         try {
-            String URL = "http://192.168.0.103/LED=" + bit;
+            String IP_Address = ipEditText.getText().toString();
+            String URL = "http://" + IP_Address + "/LED=" + bit;
             HttpClient httpClient = new DefaultHttpClient();
             try {
                 HttpGet httpget = new HttpGet(URL);
