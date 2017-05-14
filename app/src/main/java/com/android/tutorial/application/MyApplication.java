@@ -1,4 +1,4 @@
-package com.android.tutorial.activity;
+package com.android.tutorial.application;
 
 import android.app.Application;
 

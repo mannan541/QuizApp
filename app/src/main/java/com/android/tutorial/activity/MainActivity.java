@@ -26,6 +26,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.android.tutorial.R;
+import com.android.tutorial.application.MyApplication;
 import com.android.tutorial.models.User;
 import com.android.tutorial.utils.NetworkAccessInfo;
 import com.mikepenz.aboutlibraries.Libs;
@@ -427,6 +428,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void colorPickerClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), DownloadFileActivity.class);
+        startActivity(intent);
+    }
+
+    public void fileDownloadClickListener(View view) {
         Intent intent = new Intent(getApplicationContext(), ColorPickerActivity.class);
         startActivity(intent);
     }

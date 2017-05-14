@@ -72,12 +72,6 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="fileDownloadClickListener"
-                android:text="File Download" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:onClick="colorPickerClickListener"
                 android:text="Color Picker" />
 
