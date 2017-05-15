@@ -428,12 +428,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void colorPickerClickListener(View view) {
-        Intent intent = new Intent(getApplicationContext(), DownloadFileActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ColorPickerActivity.class);
         startActivity(intent);
     }
 
     public void fileDownloadClickListener(View view) {
-        Intent intent = new Intent(getApplicationContext(), ColorPickerActivity.class);
+        Intent intent = new Intent(getApplicationContext(), DownloadFileActivity.class);
         startActivity(intent);
     }
 
