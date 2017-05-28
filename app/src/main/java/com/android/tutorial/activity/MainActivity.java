@@ -437,6 +437,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void thermometerClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), ThermometerActivity.class);
+        startActivity(intent);
+    }
+
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
 
         @Override

@@ -48,4 +48,8 @@
     <color name="colorAccentTrans">#a0009688</color>
     <color name="colorBlackTrans">#a0000000</color>
 
+    <color name="innerColor">#ff7878</color>
+    <color name="middleColor">#14a895</color>
+    <color name="outerColor">#d1395c</color>
+
 </resources>

@@ -13,6 +13,13 @@
         <attr name="unitColor" format="reference"/>
     </declare-styleable>
 
+    <declare-styleable name="Thermometer">
+        <attr name="radius" format="dimension" />
+        <attr name="outerColor" format="color" />
+        <attr name="middleColor" format="color" />
+        <attr name="innerColor" format="color" />
+    </declare-styleable>
+
     <!-- Changing the attribute must be reflected in the com.devspark.robototextview.widget.RobotoTextView -->
     <attr name="typeface" format="enum">
         <enum name="roboto_thin" value="0"/>

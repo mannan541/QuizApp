@@ -142,5 +142,6 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_download_file">DownloadFileActivity</string>
+    <string name="title_activity_thermometer">ThermometerActivity</string>
 
 </resources>
