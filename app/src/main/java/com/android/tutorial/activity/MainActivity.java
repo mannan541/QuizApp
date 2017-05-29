@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 import com.android.tutorial.R;
 import com.android.tutorial.application.MyApplication;
 import com.android.tutorial.models.User;
+import com.android.tutorial.utils.LocationGetter;
 import com.android.tutorial.utils.NetworkAccessInfo;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
@@ -440,6 +442,23 @@ public class MainActivity extends AppCompatActivity {
     public void thermometerClickListener(View view) {
         Intent intent = new Intent(getApplicationContext(), ThermometerActivity.class);
         startActivity(intent);
+    }
+
+    public void getGPSlocation(View view) {
+        final LocationGetter userLocation = new LocationGetter();
+        LocationGetter.LocationResult locationResult = new LocationGetter.LocationResult() {
+            @Override
+            public void gotLocation(Location location) {
+
+                Toast.makeText(MainActivity.this, "Your Location: " + location, Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        boolean locationEnabled = userLocation.getLocation(this, locationResult);
+        if (!locationEnabled) {
+            Toast.makeText(this, "Enable location on your device.", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
