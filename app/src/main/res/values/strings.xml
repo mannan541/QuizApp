@@ -42,6 +42,8 @@
         completions."
     </string>
 
+    <string name="action_search">Search</string>
+    <string name="action_delete">Delete</string>
 
     <string name="next">NEXT</string>
     <string name="skip">SKIP</string>
@@ -143,5 +145,6 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_download_file">DownloadFileActivity</string>
     <string name="title_activity_thermometer">ThermometerActivity</string>
+    <string name="title_activity_recycler_view">RecyclerViewActivity</string>
 
 </resources>

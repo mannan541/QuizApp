@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_search) {
             Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
             startActivity(intent);
             return true;
@@ -336,6 +336,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void counDownClickListener(View view) {
         Intent intent = new Intent(getApplicationContext(), CountDownActivity.class);
+        startActivity(intent);
+    }
+
+    public void recyclerClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), RecyclerViewActivity.class);
         startActivity(intent);
     }
 

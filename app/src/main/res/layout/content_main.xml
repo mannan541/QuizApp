@@ -72,6 +72,12 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="recyclerClickListener"
+                android:text="Recycler View" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:onClick="getGPSlocation"
                 android:text="Get GPS locatoin" />
 
