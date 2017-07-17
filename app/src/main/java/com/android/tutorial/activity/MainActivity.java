@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,10 +19,7 @@ import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.android.tutorial.R;
@@ -33,13 +29,8 @@ import com.android.tutorial.utils.LocationGetter;
 import com.android.tutorial.utils.NetworkAccessInfo;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
+import com.noveogroup.android.log.Log;
 import com.vansuita.library.CheckNewAppVersion;
-
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.util.List;
 
@@ -51,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
     ConnectionStatusView statusView;
     EditText edit_text;
     String editTextInputString = "Dummy Content";
-    Button led_on_off;
-    Switch ledSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Log.d("HelloBoy","helalksdgfjkladsj");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.hide();
         fab.setOnClickListener(new View.OnClickListener() {
@@ -76,9 +66,6 @@ public class MainActivity extends AppCompatActivity {
 
         statusView = (ConnectionStatusView) findViewById(R.id.statusView);
         edit_text = (EditText) findViewById(R.id.edit_text);
-        led_on_off = (Button) findViewById(R.id.led_on_off);
-        ledSwitch = (Switch) findViewById(R.id.ledSwitch);
-        ledSwitchListener();
 
         new CheckNewAppVersion(getApplicationContext()).setOnTaskCompleteListener(new CheckNewAppVersion.ITaskComplete() {
             @Override
@@ -146,6 +133,15 @@ public class MainActivity extends AppCompatActivity {
         MyApplication myApplication = new MyApplication();
         myApplication.setGlobalTitle(editTextInputString);
         Intent intent = new Intent(MainActivity.this, ListActivity.class);
+        intent.putExtra("title", editTextInputString);
+        startActivity(intent);
+    }
+
+    public void paginatedListClickListener(View view) {
+        editTextInputString = edit_text.getText().toString();
+        MyApplication myApplication = new MyApplication();
+        myApplication.setGlobalTitle(editTextInputString);
+        Intent intent = new Intent(MainActivity.this, PaginatedListViewActivity.class);
         intent.putExtra("title", editTextInputString);
         startActivity(intent);
     }
@@ -222,30 +218,13 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    String bit = "OFF";
-    String SetServerString = "";
-
-    public void ledOnOFFClickListener(View view) {
+    public void ledOnOffClickListener(View view) {
         if (NetworkAccessInfo.isNetworkAvailable(getApplicationContext())) {
             Intent intent = new Intent(getApplicationContext(), LedControllActivity.class);
             startActivity(intent);
-//            new MyAsyncTask().execute();
         } else {
             Toast.makeText(this, "Internet Not Connected", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    public void ledSwitchListener() {
-        ledSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (NetworkAccessInfo.isNetworkAvailable(getApplicationContext())) {
-                    new MyAsyncTask().execute();
-                } else {
-                    Toast.makeText(MainActivity.this, "Internet Not Connected", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
     public void notificationBtnClickListener(View view) {
@@ -466,73 +445,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            if (bit.equals("OFF")) {
-                bit = "ON";
-            } else {
-                bit = "OFF";
-            }
-            http_get_request(bit);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            if (bit.equals("ON")) {
-                led_on_off.setText("Turn LED OFF");
-//                ledSwitch.setChecked(true);
-            } else {
-                led_on_off.setText("Turn LED ON");
-//                ledSwitch.setChecked(true);
-            }
-            if (SetServerString.contains("Exception")) {
-                Toast.makeText(MainActivity.this, SetServerString, Toast.LENGTH_SHORT).show();
-            }
-        }
-
-    }
-
-    public void http_get_request(String bit) {
-        try {
-            String URL = "http://10.50.75.217/LED=" + bit;
-            HttpClient httpClient = new DefaultHttpClient();
-            try {
-                HttpGet httpget = new HttpGet(URL);
-                ResponseHandler<String> responseHandler = new BasicResponseHandler();
-                SetServerString = httpClient.execute(httpget, responseHandler);
-                if (SetServerString.contains("Led pin is now:")) {
-                    if (bit.equals("OFF")) {
-                        bit = "ON";
-                    } else {
-                        bit = "OFF";
-                    }
-                } else {
-                    SetServerString = "Something went wrong!";
-                }
-//                Toast.makeText(this, "SetServerString: " + SetServerString, Toast.LENGTH_SHORT).show();
-            } catch (Exception ex) {
-                SetServerString = "Exception: " + ex;
-//                Toast.makeText(this, "Exception: " + ex, Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception e) {
-            SetServerString = "Exception: " + e;
-//            Toast.makeText(this, "Exception: " + e, Toast.LENGTH_SHORT).show();
-        }
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
 //        startActivity(intent);
     }
+
 }

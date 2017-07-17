@@ -15,6 +15,7 @@
         android:id="@+id/statusView"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:visibility="visible"
         app:dismissOnComplete="true" />
     <!--for custom layout on status view-->
     <!--<iammert.com.library.StatusView-->
@@ -46,28 +47,11 @@
                 android:hint="Enter Title for next Activity.."
                 android:inputType="textCapWords" />
 
-            <LinearLayout
+            <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Turn LED"
-                    android:textStyle="bold" />
-
-                <Switch
-                    android:id="@+id/ledSwitch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:paddingRight="6dp" />
-            </LinearLayout>
+                android:onClick="paginatedListClickListener"
+                android:text="Paginated ListView" />
 
             <Button
                 android:layout_width="match_parent"
@@ -382,8 +366,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:onClick="ledOnOFFClickListener"
-                android:text="Turn LED ON" />
+                android:onClick="ledOnOffClickListener"
+                android:text="Turn LED ON or OFF" />
 
             <Button
                 android:id="@+id/notification_button"
