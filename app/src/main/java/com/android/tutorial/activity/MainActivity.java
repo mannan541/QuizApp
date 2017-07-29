@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Log.d("HelloBoy","helalksdgfjkladsj");
+        Log.d("HelloBoy", "helalksdgfjkladsj");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.hide();
         fab.setOnClickListener(new View.OnClickListener() {
@@ -134,6 +134,11 @@ public class MainActivity extends AppCompatActivity {
         myApplication.setGlobalTitle(editTextInputString);
         Intent intent = new Intent(MainActivity.this, ListActivity.class);
         intent.putExtra("title", editTextInputString);
+        startActivity(intent);
+    }
+
+    public void socketClickListener(View view) {
+        Intent intent = new Intent(MainActivity.this, SocketActivity.class);
         startActivity(intent);
     }
 

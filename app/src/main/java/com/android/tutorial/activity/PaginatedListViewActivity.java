@@ -167,22 +167,26 @@ public class PaginatedListViewActivity extends AppCompatActivity {
             // Next page request
             URL = "http://api.androidhive.info/list_paging/?page=" + current_page;
 
-            xml = parser.getXmlFromUrl(URL); // getting XML
-            doc = parser.getDomElement(xml); // getting DOM element
+            try {
 
-            NodeList nl = doc.getElementsByTagName(KEY_ITEM);
-            // looping through all item nodes <item>
-            for (int i = 0; i < nl.getLength(); i++) {
-                // creating new HashMap
-                HashMap<String, String> map = new HashMap<String, String>();
-                Element e = (Element) nl.item(i);
+                xml = parser.getXmlFromUrl(URL); // getting XML
+                doc = parser.getDomElement(xml); // getting DOM element
 
-                // adding each child node to HashMap key => value
-                map.put(KEY_ID, parser.getValue(e, KEY_ID));
-                map.put(KEY_NAME, parser.getValue(e, KEY_NAME));
+                NodeList nl = doc.getElementsByTagName(KEY_ITEM);
+                // looping through all item nodes <item>
+                for (int i = 0; i < nl.getLength(); i++) {
+                    // creating new HashMap
+                    HashMap<String, String> map = new HashMap<String, String>();
+                    Element e = (Element) nl.item(i);
 
-                // adding HashList to ArrayList
-                menuItems.add(map);
+                    // adding each child node to HashMap key => value
+                    map.put(KEY_ID, parser.getValue(e, KEY_ID));
+                    map.put(KEY_NAME, parser.getValue(e, KEY_NAME));
+
+                    // adding HashList to ArrayList
+                    menuItems.add(map);
+                }
+            } catch (Exception e) {
             }
 
                 /*    // get listview current position - used to maintain scroll position

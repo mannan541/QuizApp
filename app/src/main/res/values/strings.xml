@@ -147,5 +147,6 @@
     <string name="title_activity_thermometer">ThermometerActivity</string>
     <string name="title_activity_recycler_view">RecyclerViewActivity</string>
     <string name="title_activity_paginated_list_view">PaginatedListViewActivity</string>
+    <string name="title_activity_socket">SocketActivity</string>
 
 </resources>
