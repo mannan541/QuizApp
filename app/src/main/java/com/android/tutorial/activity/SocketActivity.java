@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.tutorial.R;
 
@@ -97,13 +98,17 @@ public class SocketActivity extends AppCompatActivity {
     public void socketSendMessageClick(View view) {
         try {
 
-            PrintWriter printWriter = new PrintWriter(socket.getOutputStream());
+            if (socket != null) {
+                PrintWriter printWriter = new PrintWriter(socket.getOutputStream());
 
-            printWriter.println("" + editText.getText().toString());
-            printWriter.flush();
+                printWriter.println("" + editText.getText().toString());
+                printWriter.flush();
 
-            Log.d("Mysocket", editText.getText().toString());
-
+                Log.d("Mysocket", editText.getText().toString());
+            } else {
+                Toast.makeText(this, "socket is null", Toast.LENGTH_SHORT).show();
+                Log.d("Mysocket", "socket is null");
+            }
         } catch (IOException e) {
             Log.d("Mysocket", "IOException: " + e.getMessage());
             e.printStackTrace();
