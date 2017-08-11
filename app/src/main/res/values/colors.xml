@@ -9,6 +9,9 @@
     <color name="colorPrimaryDark">#b93221</color>
     <color name="colorAccent">#d7666666</color>
 
+    <color name="white">#d7ffffff</color>
+    <color name="transparent">#00666666</color>
+
     <color name="from">#000000</color>
     <color name="subject">#111111</color>
     <color name="timestamp">#4285f4</color>
