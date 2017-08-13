@@ -152,5 +152,7 @@
     <string name="free_space">Free Space</string>
     <string name="free">Free</string>
     <string name="total">Total</string>
+    <string name="title_activity_youtube_in_embeded_webview">YoutubeInEmbededWebviewActivity
+    </string>
 
 </resources>

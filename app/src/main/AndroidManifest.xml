@@ -461,6 +461,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
+        <activity
+            android:name=".activity.YoutubeInEmbededWebviewActivity"
+            android:label="@string/title_activity_youtube_in_embeded_webview"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.tutorial.activity.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

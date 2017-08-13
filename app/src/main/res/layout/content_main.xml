@@ -11,22 +11,6 @@
     tools:context=".activity.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <iammert.com.library.ConnectionStatusView
-        android:id="@+id/statusView"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:visibility="visible"
-        app:dismissOnComplete="true" />
-    <!--for custom layout on status view-->
-    <!--<iammert.com.library.StatusView-->
-    <!--android:id="@+id/status"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="48dp"-->
-    <!--app:dismissOnComplete="true"-->
-    <!--app:complete="@layout/completeLayout"-->
-    <!--app:error="@layout/errorLayout"-->
-    <!--app:loading="@layout/loadingLayout"/>-->
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -46,6 +30,12 @@
                 android:hint="Enter Title for next Activity.."
                 android:inputType="textCapWords"
                 android:visibility="gone" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="webViewYoutubeClickListener"
+                android:text="Youtube Embedded Player" />
 
             <Button
                 android:layout_width="match_parent"
@@ -401,5 +391,21 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <iammert.com.library.ConnectionStatusView
+        android:id="@+id/statusView"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:visibility="visible"
+        app:dismissOnComplete="true" />
+    <!--for custom layout on status view-->
+    <!--<iammert.com.library.StatusView-->
+    <!--android:id="@+id/status"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="48dp"-->
+    <!--app:dismissOnComplete="true"-->
+    <!--app:complete="@layout/completeLayout"-->
+    <!--app:error="@layout/errorLayout"-->
+    <!--app:loading="@layout/loadingLayout"/>-->
 
 </LinearLayout>

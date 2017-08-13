@@ -269,6 +269,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void webViewYoutubeClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), YoutubeInEmbededWebviewActivity.class);
+        startActivity(intent);
+    }
+
     public void phoneCallClickListener(View view) {
         Intent intent = new Intent(getApplicationContext(), PhoneCallActivity.class);
         startActivity(intent);
