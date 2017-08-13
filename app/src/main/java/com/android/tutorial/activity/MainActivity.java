@@ -137,6 +137,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void memoryInfoClickListener(View view) {
+        Intent intent = new Intent(MainActivity.this, MemoryInfoActivity.class);
+        startActivity(intent);
+    }
+
     public void socketClickListener(View view) {
         Intent intent = new Intent(MainActivity.this, SocketActivity.class);
         startActivity(intent);
@@ -456,5 +461,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
 //        startActivity(intent);
     }
-
 }
