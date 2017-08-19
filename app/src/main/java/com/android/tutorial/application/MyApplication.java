@@ -2,6 +2,7 @@ package com.android.tutorial.application;
 
 import android.app.Application;
 
+import com.firebase.client.Firebase;
 import com.orm.SugarContext;
 
 /**
@@ -14,6 +15,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         SugarContext.init(this);
+
+        Firebase.setAndroidContext(this);
 
     }
 

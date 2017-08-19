@@ -21,6 +21,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE-FIREBASE.txt'
+        exclude 'META-INF/NOTICE'
+    }
 }
 repositories {
     mavenCentral()
@@ -37,6 +42,7 @@ dependencies {
     compile('org.eclipse.paho:org.eclipse.paho.android.service:1.0.2') { // mqtt iot library
         exclude module: 'support-v4'
     }
+    //noinspection GradleCompatible
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'com.android.support:design:25.0.0'
     compile 'com.android.support:support-v4:25.0.0'
@@ -58,6 +64,8 @@ dependencies {
     compile 'com.github.nisrulz:screenshott:1.1.0'
     compile 'com.google.firebase:firebase-core:9.6.0'
     compile 'com.google.firebase:firebase-messaging:9.6.0'
+    compile 'com.firebase:firebase-client-android:2.5.2+'
+    compile 'co.devcenter.square:android-ui-library:0.1'
     compile 'com.github.yalantis:todolist:v1.0.1'
     compile 'com.craftman.cardform:cardform:0.0.2'
     compile 'com.github.SandroMachado:openalpr-android:1.1.2'
