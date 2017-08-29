@@ -164,5 +164,6 @@
     </string>
     <string name="test_time_text">10:30 AM</string>
     <string name="test_date_cell_text">2016/08/08</string>
+    <string name="title_activity_retrofit_signup">RetrofitSignupActivity</string>
 
 </resources>

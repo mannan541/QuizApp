@@ -34,6 +34,18 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="retrofitClickListener"
+                android:text="Retrofit " />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="youtubeVideoDownlaoderClickListener"
+                android:text="Youtube Video Downloader" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:onClick="firebaseChatClickListener"
                 android:text="Firebase Chat" />
 
