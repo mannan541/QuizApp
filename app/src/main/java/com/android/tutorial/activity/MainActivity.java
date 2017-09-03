@@ -273,6 +273,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), RetrofitSignupActivity.class);
         startActivity(intent);
     }
+    public void fidgetSpinnerClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), FidgetSpinnerActivity.class);
+        startActivity(intent);
+    }
 
     public void youtubeVideoDownlaoderClickListener(View view) {
         Intent intent = new Intent(getApplicationContext(), YoutubeDownloaderActivity.class);

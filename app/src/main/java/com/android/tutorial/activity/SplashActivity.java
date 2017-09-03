@@ -38,13 +38,13 @@ public class SplashActivity extends AwesomeSplash {
         configSplash.setPathSplashStrokeSize(3); //I advise value be <5
         configSplash.setPathSplashStrokeColor(R.color.colorAccent); //any color you want form colors.xml
         configSplash.setAnimPathFillingDuration(1000);
-        configSplash.setPathSplashFillColor(R.color.dot_dark_screen4); //path object filling color
+        configSplash.setPathSplashFillColor(R.color.white); //path object filling color
 
 
         try {
             //Customize Title
             configSplash.setTitleSplash("My Awesome App");
-            configSplash.setTitleTextColor(R.color.dot_dark_screen4);
+            configSplash.setTitleTextColor(R.color.white);
             configSplash.setTitleTextSize(30f); //float value
             configSplash.setAnimTitleDuration(500);
             configSplash.setAnimTitleTechnique(Techniques.FlipInX);

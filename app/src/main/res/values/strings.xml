@@ -166,5 +166,6 @@
     <string name="test_date_cell_text">2016/08/08</string>
     <string name="title_activity_retrofit_signup">RetrofitSignupActivity</string>
     <string name="title_activity_youtube_downloader">YoutubeDownloaderActivity</string>
+    <string name="title_activity_fidget_spinner">FidgetSpinnerActivity</string>
 
 </resources>
