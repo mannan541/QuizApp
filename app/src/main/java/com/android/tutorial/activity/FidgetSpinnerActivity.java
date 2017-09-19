@@ -8,8 +8,6 @@ import android.widget.TextView;
 import com.android.tutorial.R;
 import com.android.tutorial.view.FidgetSpinner;
 
-import static com.android.tutorial.R.drawable.spinner;
-
 public class FidgetSpinnerActivity extends AppCompatActivity {
 
     TextView spinnerTV;
@@ -25,7 +23,7 @@ public class FidgetSpinnerActivity extends AppCompatActivity {
 
         spinnerTV = (TextView) findViewById(R.id.spinnerTV);
         fidgetSpinner = (FidgetSpinner) findViewById(R.id.fidgetspinner);
-        fidgetSpinner.setImageDrawable(spinner, spinnerTV);
+        fidgetSpinner.setImageDrawable(R.drawable.spinner, spinnerTV);
     }
 
 }

@@ -506,6 +506,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
+        <activity
+            android:name=".activity.DoorSignViewActivity"
+            android:label="@string/title_activity_door_sign_view"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.tutorial.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.TicTacToeActivity"
+            android:label="@string/title_activity_tic_tac_toe"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.tutorial.activity.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

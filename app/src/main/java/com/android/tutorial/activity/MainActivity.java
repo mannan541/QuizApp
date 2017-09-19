@@ -273,6 +273,17 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), RetrofitSignupActivity.class);
         startActivity(intent);
     }
+
+    public void ticTacToeClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), TicTacToeActivity.class);
+        startActivity(intent);
+    }
+
+    public void doorSignViewClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), DoorSignViewActivity.class);
+        startActivity(intent);
+    }
+
     public void fidgetSpinnerClickListener(View view) {
         Intent intent = new Intent(getApplicationContext(), FidgetSpinnerActivity.class);
         startActivity(intent);

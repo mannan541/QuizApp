@@ -34,6 +34,18 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="ticTacToeClickListener"
+                android:text="Tic Tac Toe" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="doorSignViewClickListener"
+                android:text="Door Sign View" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:onClick="fidgetSpinnerClickListener"
                 android:text="Fidget Spinner " />
 
