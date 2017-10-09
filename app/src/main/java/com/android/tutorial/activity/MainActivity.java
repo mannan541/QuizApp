@@ -8,8 +8,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.location.Location;
+import android.media.AudioManager;
 import android.net.Uri;
+import android.net.rtp.AudioCodec;
+import android.net.rtp.AudioGroup;
+import android.net.rtp.AudioStream;
+import android.net.rtp.RtpStream;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -20,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.tutorial.R;
@@ -32,6 +39,10 @@ import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.noveogroup.android.log.Log;
 import com.vansuita.library.CheckNewAppVersion;
 
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 import java.util.List;
 
 import iammert.com.library.ConnectionStatusView;
@@ -41,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     ConnectionStatusView statusView;
     EditText edit_text;
+    public TextView text_view;
     String editTextInputString = "Dummy Content";
 
     @Override
@@ -66,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         statusView = (ConnectionStatusView) findViewById(R.id.statusView);
         edit_text = (EditText) findViewById(R.id.edit_text);
+        text_view = (TextView) findViewById(R.id.ip_text);
 
         new CheckNewAppVersion(getApplicationContext()).setOnTaskCompleteListener(new CheckNewAppVersion.ITaskComplete() {
             @Override
@@ -276,6 +289,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void ticTacToeClickListener(View view) {
         Intent intent = new Intent(getApplicationContext(), TicTacToeActivity.class);
+        startActivity(intent);
+    }
+
+    public void businessCardClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), BusinessCardActivity .class);
         startActivity(intent);
     }
 
@@ -496,4 +514,46 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
 //        startActivity(intent);
     }
+
+    public void rtpClickListener(View view) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        try {
+            AudioManager audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            audio.setMode(AudioManager.MODE_IN_COMMUNICATION);
+            AudioGroup audioGroup = new AudioGroup();
+            audioGroup.setMode(AudioGroup.MODE_NORMAL);
+            AudioStream audioStream = new AudioStream(InetAddress.getByAddress(getLocalIPAddress()));
+            audioStream.setCodec(AudioCodec.PCMU);
+            audioStream.setMode(RtpStream.MODE_NORMAL);
+            //set receiver(vlc player) machine ip address(please update with your machine ip)
+            audioStream.associate(InetAddress.getByAddress(new byte[]{(byte) 192, (byte) 168, (byte) 217, (byte) 2}), 22222);
+            audioStream.join(audioGroup);
+            text_view.setText("IP: 192.168.10.6:22222");
+        } catch (Exception e) {
+            text_view.setText("Exception: " + e.getMessage());
+            Log.d("----------------------", e.toString());
+            e.printStackTrace();
+        }
+    }
+
+    public static byte[] getLocalIPAddress() {
+        byte ip[] = null;
+        try {
+            for (Enumeration en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
+                NetworkInterface intf = (NetworkInterface) en.nextElement();
+                for (Enumeration enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
+                    InetAddress inetAddress = (InetAddress) enumIpAddr.nextElement();
+                    if (!inetAddress.isLoopbackAddress()) {
+                        ip = inetAddress.getAddress();
+                    }
+                }
+            }
+        } catch (SocketException ex) {
+//            text_view.setText("SocketException: " + ex.getMessage());
+            Log.d("SocketException ", ex.toString());
+        }
+        return ip;
+    }
+
 }
