@@ -1,4 +1,4 @@
-package com.android.tutorial;
+package com.android.tutorial.contactcard;
 
 /**
  * Created by Mannan on 10/9/2017.
@@ -40,9 +40,9 @@ public abstract class ContactAccessor {
             @SuppressWarnings("deprecation")
             int sdkVersion = Integer.parseInt(Build.VERSION.SDK);       // Cupcake style
             if (sdkVersion < Build.VERSION_CODES.ECLAIR) {
-                className = "com.android.tutorial.ContactAccessorSdk3_4";
+                className = "com.android.tutorial.contactcard.ContactAccessorSdk3_4";
             } else {
-                className = "com.android.tutorial.ContactAccessorSdk5";
+                className = "com.android.tutorial.contactcard.ContactAccessorSdk5";
             }
             /*
              * Find the required class by name and instantiate it.

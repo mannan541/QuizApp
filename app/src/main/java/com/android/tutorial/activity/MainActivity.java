@@ -293,7 +293,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void businessCardClickListener(View view) {
-        Intent intent = new Intent(getApplicationContext(), BusinessCardActivity .class);
+        Intent intent = new Intent(getApplicationContext(), BusinessCardActivity.class);
+        startActivity(intent);
+    }
+
+    public void imageEffectsClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), ImageFilterEffectsActivity.class);
         startActivity(intent);
     }
 

@@ -1,4 +1,4 @@
-package com.android.tutorial;
+package com.android.tutorial.contactcard;
 
 /**
  * Created by Mannan on 10/9/2017.

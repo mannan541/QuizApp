@@ -1,4 +1,4 @@
-package com.android.tutorial;
+package com.android.tutorial.contactcard;
 
 import android.content.ContentResolver;
 import android.content.Intent;

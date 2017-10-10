@@ -14,8 +14,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.tutorial.ContactAccessor;
-import com.android.tutorial.ContactInfo;
+import com.android.tutorial.contactcard.ContactAccessor;
+import com.android.tutorial.contactcard.ContactInfo;
 import com.android.tutorial.R;
 
 public class BusinessCardActivity extends Activity {
