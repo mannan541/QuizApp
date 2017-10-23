@@ -205,5 +205,6 @@
     <string name="temperature">Temperature</string>
     <string name="tint">Tint</string>
     <string name="vignette">Vignette</string>
-    
+    <string name="title_activity_sms">SMSActivity</string>
+
 </resources>

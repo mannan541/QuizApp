@@ -25,6 +25,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_SMS" />
 
     <application
         android:name=".application.MyApplication"
@@ -539,6 +540,15 @@
         <activity
             android:name=".activity.ImageFilterEffectsActivity"
             android:label="@string/title_activity_image_filter_effects"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.tutorial.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.SMSActivity"
+            android:label="@string/title_activity_sms"
             android:parentActivityName=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

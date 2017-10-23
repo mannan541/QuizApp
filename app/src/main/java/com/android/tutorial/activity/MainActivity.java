@@ -297,6 +297,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void smsListClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), SMSActivity.class);
+        startActivity(intent);
+    }
+
     public void imageEffectsClickListener(View view) {
         Intent intent = new Intent(getApplicationContext(), ImageFilterEffectsActivity.class);
         startActivity(intent);
