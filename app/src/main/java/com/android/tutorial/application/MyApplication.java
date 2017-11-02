@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.firebase.client.Firebase;
 import com.orm.SugarContext;
+import com.splunk.mint.Mint;
 
 /**
  * Created by Mannan on 11/23/2016.
@@ -15,6 +16,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         SugarContext.init(this);
+
+        Mint.initAndStartSession(getApplicationContext(), "73b50873");
 
         Firebase.setAndroidContext(this);
 

