@@ -24,6 +24,7 @@ import com.android.tutorial.chat.utils.ProfanityFilter;
 import com.android.tutorial.chat.utils.SCUtils;
 import com.android.tutorial.chat.utils.adapters.ChatAdapter;
 import com.android.tutorial.chat.utils.models.Message;
+import com.android.tutorial.utils.MyDevice;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,6 +43,7 @@ public class ChatFirebaseActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private RecyclerView main_recycler_view;
     private String userID;
+    private String userEmailID;
     private ChatFirebaseActivity mContext;
     private ChatAdapter adapter;
     private DatabaseReference databaseRef;
@@ -73,7 +75,8 @@ public class ChatFirebaseActivity extends AppCompatActivity {
         main_recycler_view.setAdapter(adapter);
 
         databaseRef.child("the_messages").limitToLast(50).addChildEventListener(new ChildEventListener() {
-            @Override public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 progressBar.setVisibility(View.GONE);
                 Message new_message = dataSnapshot.getValue(Message.class);
                 messageArrayList.add(new_message);
@@ -81,27 +84,32 @@ public class ChatFirebaseActivity extends AppCompatActivity {
                 main_recycler_view.scrollToPosition(adapter.getItemCount() - 1);
             }
 
-            @Override public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
             }
 
-            @Override public void onChildRemoved(DataSnapshot dataSnapshot) {
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
                 Log.d("REMOVED", dataSnapshot.getValue(Message.class).toString());
                 messageArrayList.remove(dataSnapshot.getValue(Message.class));
                 adapter.notifyDataSetChanged();
             }
 
-            @Override public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
             }
 
-            @Override public void onCancelled(DatabaseError databaseError) {
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
 
         imageButton_send.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
                 process_new_message(editText_message.getText().toString().trim(), false);
             }
         });
@@ -136,7 +144,8 @@ public class ChatFirebaseActivity extends AppCompatActivity {
 
         editText_message.setText("");
 
-        Message xmessage = new Message(userID, username, new_message, System.currentTimeMillis() / 1000L, IS_ADMIN, isNotification);
+        Message xmessage = new Message(userID, userEmailID, username, new_message,
+                System.currentTimeMillis() / 1000L, IS_ADMIN, isNotification);
         String key = databaseRef.child("the_messages").push().getKey();
         databaseRef.child("the_messages").child(key).setValue(xmessage);
 
@@ -146,8 +155,10 @@ public class ChatFirebaseActivity extends AppCompatActivity {
     //Popup message with your username if none found. Change it to your liking
     private void logic_for_username() {
         userID = SCUtils.getUniqueID(getApplicationContext());
+        userEmailID = MyDevice.getDeviceEmailName(ChatFirebaseActivity.this);
         databaseRef.child("users").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override public void onDataChange(DataSnapshot dataSnapshot) {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 progressBar.setVisibility(View.GONE);
                 if (!dataSnapshot.exists()) {
                     show_alert_username();
@@ -157,7 +168,8 @@ public class ChatFirebaseActivity extends AppCompatActivity {
                 }
             }
 
-            @Override public void onCancelled(DatabaseError databaseError) {
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
                 Log.w("!!!", "username:onCancelled", databaseError.toException());
             }
         });
@@ -172,29 +184,33 @@ public class ChatFirebaseActivity extends AppCompatActivity {
 
         alertDialogUsername.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
 
-            @Override public void onClick(DialogInterface dialog, int id) {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
                 String new_username = input.getText().toString().trim();
                 if ((!new_username.equals(username)) && (!username.equals("anonymous"))) {
                     process_new_message(username + " changed it's nickname to " + new_username, true);
                 }
                 username = new_username;
-                databaseRef.child("users").child(userID).setValue(username);
+                databaseRef.child("users").child(userID).child(userEmailID).setValue(username);
             }
         }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
 
-            @Override public void onClick(DialogInterface dialog, int id) {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
             }
         });
         alertDialogUsername.show();
     }
 
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             show_alert_username();

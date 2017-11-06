@@ -10,6 +10,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 public class Message {
 
     private String userID;
+    private String userEmailID;
     private String username;
     private String message;
     private long timestamp;
@@ -20,8 +21,9 @@ public class Message {
 
     }
 
-    public Message(String userID, String username, String message, long timestamp, boolean fromAdmin, boolean isNotification) {
+    public Message(String userID, String userEmailID, String username, String message, long timestamp, boolean fromAdmin, boolean isNotification) {
         this.userID = userID;
+        this.userEmailID = userEmailID;
         this.username = username;
         this.message = message;
         this.timestamp = timestamp;
@@ -43,6 +45,14 @@ public class Message {
 
     public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+    public String getUserEmailID() {
+        return userEmailID;
+    }
+
+    public void setUserEmailID(String userEmailID) {
+        this.userEmailID = userEmailID;
     }
 
     public String getUsername() {
@@ -77,9 +87,11 @@ public class Message {
         this.fromAdmin = fromAdmin;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return "Message{" +
                 "userID='" + userID + '\'' +
+                "userEmailID='" + userEmailID + '\'' +
                 ", username='" + username + '\'' +
                 ", message='" + message + '\'' +
                 ", timestamp=" + timestamp +
@@ -89,7 +101,8 @@ public class Message {
     }
 
     //might want to improve this
-    @Override public boolean equals(Object other) {
+    @Override
+    public boolean equals(Object other) {
         if (other == null) return false;
         if (other == this) return true;
         Message otherMessage = (Message) other;
@@ -100,7 +113,8 @@ public class Message {
         }
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         return username.hashCode() * message.hashCode();
     }
 }
