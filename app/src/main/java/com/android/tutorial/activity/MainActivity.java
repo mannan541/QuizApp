@@ -297,6 +297,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void chatClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), ChatFirebaseActivity.class);
+        startActivity(intent);
+    }
+
     public void smsListClickListener(View view) {
         Intent intent = new Intent(getApplicationContext(), SMSActivity.class);
         startActivity(intent);

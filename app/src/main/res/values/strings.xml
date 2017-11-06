@@ -206,5 +206,6 @@
     <string name="tint">Tint</string>
     <string name="vignette">Vignette</string>
     <string name="title_activity_sms">SMSActivity</string>
+    <string name="title_activity_chat_firebase">ChatFirebaseActivity</string>
 
 </resources>

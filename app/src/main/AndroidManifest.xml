@@ -555,6 +555,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
+        <activity
+            android:name=".activity.ChatFirebaseActivity"
+            android:label="@string/title_activity_chat_firebase"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.tutorial.activity.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

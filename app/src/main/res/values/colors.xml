@@ -69,4 +69,6 @@
     <color name="middleColor">#14a895</color>
     <color name="outerColor">#d1395c</color>
 
+    <color name="material_red">#ff4444</color>
+
 </resources>
