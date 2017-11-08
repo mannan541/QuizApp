@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.location.Location;
 import android.media.AudioManager;
 import android.net.Uri;
@@ -34,6 +35,7 @@ import com.android.tutorial.application.MyApplication;
 import com.android.tutorial.models.User;
 import com.android.tutorial.utils.LocationGetter;
 import com.android.tutorial.utils.NetworkAccessInfo;
+import com.bachors.wordtospan.WordToSpan;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.noveogroup.android.log.Log;
@@ -79,6 +81,44 @@ public class MainActivity extends AppCompatActivity {
         statusView = (ConnectionStatusView) findViewById(R.id.statusView);
         edit_text = (EditText) findViewById(R.id.edit_text);
         text_view = (TextView) findViewById(R.id.ip_text);
+
+        WordToSpan WTS = new WordToSpan();
+        // set color link. Default = Color.BLUE
+        WTS.setColorTAG(Color.GREEN);
+        WTS.setColorURL(Color.MAGENTA);
+        WTS.setColorPHONE(Color.RED);
+        WTS.setColorMAIL(getResources().getColor(R.color.colorPrimary));
+        WTS.setColorMENTION(getResources().getColor(R.color.colorAccent));
+        /* add custom
+        // WTS.setRegexCUSTOM("([0-9]+-[0-9]+)");
+        // WTS.setColorCUSTOM(Color.YELLOW);
+        */
+
+        // set underline link. Default = false
+        // WTS.setUnderlineTAG(true);
+        WTS.setUnderlineURL(true);
+
+        // create link
+        String myText = "I know http://just.com/anu how to @whisper, And I #know just #how to cry,I know just @where to anu@find.com the answers";
+        WTS.setLink(myText, text_view);
+
+        // settings
+        WTS.setBackgroundHIGHLIGHT(Color.YELLOW); // Default = Color.BLUE
+        WTS.setColorHIGHLIGHT(Color.RED); // Default = Color.WHITE
+
+        // create highlighter
+        String myText1 = "Any code and resources in the Android library anywhere love code.";
+        String keyWord = "any code";
+        WTS.setHighlight(myText1, keyWord, text_view);
+
+        // click listener
+        WTS.setClickListener(new WordToSpan.ClickListener() {
+            @Override
+            public void onClick(String type, String text) {
+                // type: "tag", "mail", "url", "phone", "mention" or "custom"
+                Toast.makeText(getApplicationContext(), "Type: " + type + "\nText: " + text, Toast.LENGTH_LONG).show();
+            }
+        });
 
         new CheckNewAppVersion(getApplicationContext()).setOnTaskCompleteListener(new CheckNewAppVersion.ITaskComplete() {
             @Override
@@ -302,7 +342,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-  public void chatClickListener(View view) {
+    public void chatClickListener(View view) {
         Intent intent = new Intent(getApplicationContext(), ChatFirebaseActivity.class);
         startActivity(intent);
     }

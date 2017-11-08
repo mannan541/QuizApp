@@ -33,9 +33,9 @@
 
             <TextView
                 android:id="@+id/ip_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords"
+                android:text="I know http://just.com/anu how to @whisper, And I #know just #how to cry,I know just @where to anu@find.com the answers"
                 android:visibility="visible" />
 
             <Button
