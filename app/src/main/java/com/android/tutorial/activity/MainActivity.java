@@ -102,14 +102,14 @@ public class MainActivity extends AppCompatActivity {
         String myText = "I know http://just.com/anu how to @whisper, And I #know just #how to cry,I know just @where to anu@find.com the answers";
         WTS.setLink(myText, text_view);
 
-        // settings
+        /*  // settings
         WTS.setBackgroundHIGHLIGHT(Color.YELLOW); // Default = Color.BLUE
         WTS.setColorHIGHLIGHT(Color.RED); // Default = Color.WHITE
 
-        // create highlighter
+      // create highlighter
         String myText1 = "Any code and resources in the Android library anywhere love code.";
         String keyWord = "any code";
-        WTS.setHighlight(myText1, keyWord, text_view);
+        WTS.setHighlight(myText1, keyWord, text_view);*/
 
         // click listener
         WTS.setClickListener(new WordToSpan.ClickListener() {
