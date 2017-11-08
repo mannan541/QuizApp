@@ -297,7 +297,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void chatClickListener(View view) {
+    public void stopwatchKotlinClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), StopWatch.class);
+        startActivity(intent);
+    }
+
+  public void chatClickListener(View view) {
         Intent intent = new Intent(getApplicationContext(), ChatFirebaseActivity.class);
         startActivity(intent);
     }

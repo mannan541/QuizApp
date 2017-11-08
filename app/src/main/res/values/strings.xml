@@ -207,5 +207,16 @@
     <string name="vignette">Vignette</string>
     <string name="title_activity_sms">SMSActivity</string>
     <string name="title_activity_chat_firebase">ChatFirebaseActivity</string>
+    <string name="title_activity_stop_watch">StopWatch</string>
+
+    <string name="background">background</string>
+    <string name="logo">logo</string>
+    <string name="_01">00</string>
+    <string name="colon">:</string>
+    <string name="_50">00</string>
+    <string name="h">H </string>
+    <string name="m">M</string>
+    <string name="s">S</string>
+    <string name="zero">0</string>
 
 </resources>
