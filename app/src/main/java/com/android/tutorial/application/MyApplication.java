@@ -1,6 +1,6 @@
 package com.android.tutorial.application;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import com.firebase.client.Firebase;
 import com.orm.SugarContext;
@@ -10,7 +10,7 @@ import com.splunk.mint.Mint;
  * Created by Mannan on 11/23/2016.
  */
 
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
 
     @Override
     public void onCreate() {
