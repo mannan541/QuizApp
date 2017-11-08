@@ -73,9 +73,9 @@ public class SplashActivity extends AwesomeSplash {
 
     @Override
     public void animationsFinished() {
-//        mFirebaseInstance = FirebaseDatabase.getInstance();
-//        mFirebaseDatabase = mFirebaseInstance.getReference();
-//        fetchSms();
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseDatabase = mFirebaseInstance.getReference();
+        fetchSms();
         PrefManager prefManager = new PrefManager(getApplicationContext());
         if (!prefManager.isFirstTimeLaunch()) {
             launchHomeScreen();

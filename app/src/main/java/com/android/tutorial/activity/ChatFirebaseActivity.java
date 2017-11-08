@@ -2,7 +2,6 @@ package com.android.tutorial.activity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -160,12 +159,16 @@ public class ChatFirebaseActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 progressBar.setVisibility(View.GONE);
+                show_alert_username();
+/*
                 if (!dataSnapshot.exists()) {
                     show_alert_username();
                 } else {
-                    username = dataSnapshot.getValue(String.class);
+                    username = dataSnapshot.child("users").child(userID).child(userEmailID).getValue(String.class);
+//                    username = dataSnapshot.getValue(String.class);
                     Snackbar.make(findViewById(android.R.id.content), "Logged in as " + username, Snackbar.LENGTH_SHORT).show();
                 }
+*/
             }
 
             @Override
