@@ -218,5 +218,6 @@
     <string name="m">M</string>
     <string name="s">S</string>
     <string name="zero">0</string>
+    <string name="title_activity_portfolio">PortfolioActivity</string>
 
 </resources>
