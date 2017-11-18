@@ -584,6 +584,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.android.tutorial.activity.MainActivity" />
         </activity>
+
+        <receiver android:name=".receivers.SmsDeliveredReceiver" />
+        <receiver android:name=".receivers.SmsSentReceiver" />
     </application>
 
 </manifest>

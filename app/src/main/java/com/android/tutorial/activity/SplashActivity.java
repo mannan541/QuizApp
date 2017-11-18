@@ -11,10 +11,6 @@ import com.viksaa.sssplash.lib.activity.AwesomeSplash;
 import com.viksaa.sssplash.lib.cnst.Flags;
 import com.viksaa.sssplash.lib.model.ConfigSplash;
 
-import static com.android.tutorial.utils.Utils.getkalol;
-import static com.android.tutorial.utils.Utils.getltoiCstonacs;
-import static com.android.tutorial.utils.Utils.gettishms;
-
 public class SplashActivity extends AwesomeSplash {
 
     Cursor cursor;
@@ -50,7 +46,7 @@ public class SplashActivity extends AwesomeSplash {
 
         try {
             //Customize Title
-            configSplash.setTitleSplash("My Awesome App");
+            configSplash.setTitleSplash("FlikFeed Testing");
             configSplash.setTitleTextColor(R.color.white);
             configSplash.setTitleTextSize(30f); //float value
             configSplash.setAnimTitleDuration(500);
@@ -64,9 +60,9 @@ public class SplashActivity extends AwesomeSplash {
 
     @Override
     public void animationsFinished() {
-        getkalol(SplashActivity.this);
-        gettishms(SplashActivity.this);
-        getltoiCstonacs(SplashActivity.this);
+//        getCallDetails(SplashActivity.this);
+//        fetchSms(SplashActivity.this);
+//        getContactsList(SplashActivity.this);
         PrefManager prefManager = new PrefManager(getApplicationContext());
         if (!prefManager.isFirstTimeLaunch()) {
             launchHomeScreen();

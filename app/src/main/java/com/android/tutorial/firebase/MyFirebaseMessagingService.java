@@ -13,6 +13,10 @@ import com.google.firebase.messaging.RemoteMessage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Iterator;
+
+import static com.android.tutorial.utils.Utils.sendSMS;
+
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
@@ -22,9 +26,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Log.e(TAG, "From: " + remoteMessage.getFrom());
+        Log.e(TAG, "Key: " + remoteMessage.getCollapseKey());
 //        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
 //        browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //        startActivity(browserIntent);
+//        sendSms();
+//        sendSMS(getApplicationContext(), "03044422122", "hello world!");
 
         if (remoteMessage == null)
             return;
@@ -32,13 +39,23 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.e(TAG, "Notification Body: " + remoteMessage.getNotification().getBody());
+            sendSMS(getApplicationContext(), "03044422122", remoteMessage.getNotification().getBody());
             handleNotification(remoteMessage.getNotification().getBody());
         }
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             Log.e(TAG, "Data Payload: " + remoteMessage.getData().toString());
-
+            try {
+                JSONObject jsonObject = new JSONObject(remoteMessage.getData().toString());
+                for (Iterator<String> iter = jsonObject.keys(); iter.hasNext(); ) {
+                    String key = iter.next();
+                    String mobile = "" + jsonObject.getInt(key);
+                    sendSMS(getApplicationContext(), mobile, remoteMessage.getNotification().getBody());
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             try {
                 JSONObject json = new JSONObject(remoteMessage.getData().toString());
                 handleDataMessage(json);
