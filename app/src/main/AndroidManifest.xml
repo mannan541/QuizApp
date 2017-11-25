@@ -52,8 +52,16 @@
         <service android:name=".services.TimerService" />
         <service android:name=".services.StopwatchService" />
 
+        <service
+            android:name=".firebase.storage.MyDownloadService"
+            android:exported="false" />
+
+        <service
+            android:name=".firebase.storage.MyUploadService"
+            android:exported="false" />
+
         <!-- Firebase Notifications -->
-        <service android:name=".firebase.MyFirebaseMessagingService">
+        <service android:name=".firebase.notifications.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -587,6 +595,16 @@
 
         <receiver android:name=".receivers.SmsDeliveredReceiver" />
         <receiver android:name=".receivers.SmsSentReceiver" />
+
+        <activity
+            android:name=".activity.FirebaseStorageActivity"
+            android:label="@string/title_activity_firebase_storage"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.tutorial.activity.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

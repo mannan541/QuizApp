@@ -40,4 +40,7 @@
     <dimen name="date_text_side_bar_width">100dp</dimen>
     <dimen name="data_text_side_bar_height">1dp</dimen>
 
+    <dimen name="standard_field_width">160dp</dimen>
+    <dimen name="margin_1">8dp</dimen>
+    <dimen name="margin_2">16dp</dimen>
 </resources>

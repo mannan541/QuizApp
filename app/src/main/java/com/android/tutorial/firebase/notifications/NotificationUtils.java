@@ -1,4 +1,4 @@
-package com.android.tutorial.firebase;
+package com.android.tutorial.firebase.notifications;
 
 import android.app.ActivityManager;
 import android.app.Notification;
@@ -20,6 +20,7 @@ import android.text.TextUtils;
 import android.util.Patterns;
 
 import com.android.tutorial.R;
+import com.android.tutorial.firebase.Config;
 
 import java.io.IOException;
 import java.io.InputStream;

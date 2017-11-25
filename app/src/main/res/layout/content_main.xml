@@ -41,6 +41,11 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="firebaseStorageClickListener"
+                android:text="Firebase Storage" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:onClick="portfolioClickListener"
                 android:text="Portfolio" />
             <Button

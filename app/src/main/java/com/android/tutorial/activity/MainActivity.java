@@ -546,6 +546,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void firebaseStorageClickListener(View view) {
+        Intent intent = new Intent(getApplicationContext(), FirebaseStorageActivity.class);
+        startActivity(intent);
+    }
+
     public void fileDownloadClickListener(View view) {
         Intent intent = new Intent(getApplicationContext(), DownloadFileActivity.class);
         startActivity(intent);

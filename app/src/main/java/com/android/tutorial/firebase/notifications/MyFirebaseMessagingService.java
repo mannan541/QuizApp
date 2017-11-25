@@ -1,4 +1,4 @@
-package com.android.tutorial.firebase;
+package com.android.tutorial.firebase.notifications;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.tutorial.activity.MainActivity;
+import com.android.tutorial.firebase.Config;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 

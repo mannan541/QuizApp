@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.android.tutorial.R;
 import com.android.tutorial.firebase.Config;
-import com.android.tutorial.firebase.NotificationUtils;
+import com.android.tutorial.firebase.notifications.NotificationUtils;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class FireBaseNotificationActivity extends AppCompatActivity {
