@@ -2,27 +2,31 @@ package com.android.tutorial.activity;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.annotation.NonNull;
 import android.widget.Toast;
 
+import com.android.tutorial.BuildConfig;
 import com.android.tutorial.R;
 import com.android.tutorial.utils.PrefManager;
 import com.daimajia.androidanimations.library.Techniques;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.viksaa.sssplash.lib.activity.AwesomeSplash;
 import com.viksaa.sssplash.lib.cnst.Flags;
 import com.viksaa.sssplash.lib.model.ConfigSplash;
 
-import static com.android.tutorial.utils.Utils.fetchSms;
-import static com.android.tutorial.utils.Utils.getCallDetails;
-import static com.android.tutorial.utils.Utils.getContactsList;
-
 public class SplashActivity extends AwesomeSplash {
 
     Cursor cursor;
+    ConfigSplash configSplash;
 
     @Override
     public void initSplash(ConfigSplash configSplash) {
             /* you don't have to override every property */
 
+        this.configSplash = configSplash;
         //Customize Circular Reveal
         configSplash.setBackgroundColor(R.color.colorPrimary); //any color you want form colors.xml
         configSplash.setAnimCircularRevealDuration(1000); //int ms
@@ -47,10 +51,9 @@ public class SplashActivity extends AwesomeSplash {
         configSplash.setAnimPathFillingDuration(1000);
         configSplash.setPathSplashFillColor(R.color.white); //path object filling color
 
-
         try {
             //Customize Title
-            configSplash.setTitleSplash("FlikFeed Testing");
+            configSplash.setTitleSplash(welcomeMessage);
             configSplash.setTitleTextColor(R.color.white);
             configSplash.setTitleTextSize(30f); //float value
             configSplash.setAnimTitleDuration(500);
@@ -60,20 +63,73 @@ public class SplashActivity extends AwesomeSplash {
             Toast.makeText(this, "Text Font EXCEPTION:" + e, Toast.LENGTH_SHORT).show();
         }
 
+        remoteConfigInitMessage();
     }
 
     @Override
     public void animationsFinished() {
-        getCallDetails(SplashActivity.this);
-        fetchSms(SplashActivity.this);
-        getContactsList(SplashActivity.this);
-//        PrefManager prefManager = new PrefManager(getApplicationContext());
-//        if (!prefManager.isFirstTimeLaunch()) {
-//            launchHomeScreen();
-        finish();
-//        } else {
-//            launchWelcomeScreen();
-//        }
+//        getCallDetails(SplashActivity.this);
+//        fetchSms(SplashActivity.this);
+//        getContactsList(SplashActivity.this);
+        PrefManager prefManager = new PrefManager(getApplicationContext());
+        if (!prefManager.isFirstTimeLaunch()) {
+            launchHomeScreen();
+//        finish();
+//        Toast.makeText(this, "Network Problem Occurred!", Toast.LENGTH_SHORT).show();
+        } else {
+            launchWelcomeScreen();
+        }
+    }
+
+    String welcomeMessage = "Loading";
+    // Remote Config keys
+    private static final String LOADING_PHRASE_CONFIG_KEY = "loading_phrase";
+    private static final String WELCOME_MESSAGE_KEY = "welcome_message";
+    private static final String WELCOME_MESSAGE_CAPS_KEY = "welcome_message_caps";
+
+    private FirebaseRemoteConfig mFirebaseRemoteConfig;
+
+    private void remoteConfigInitMessage() {
+        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
+                .setDeveloperModeEnabled(BuildConfig.DEBUG)
+                .build();
+        mFirebaseRemoteConfig.setConfigSettings(configSettings);
+        mFirebaseRemoteConfig.setDefaults(R.xml.remote_config_defaults);
+        fetchWelcome();
+    }
+
+    private void fetchWelcome() {
+        welcomeMessage = mFirebaseRemoteConfig.getString(LOADING_PHRASE_CONFIG_KEY);
+
+        long cacheExpiration = 3600; // 1 hour in seconds.
+        // If your app is using developer mode, cacheExpiration is set to 0, so each fetch will
+        // retrieve values from the service.
+        if (mFirebaseRemoteConfig.getInfo().getConfigSettings().isDeveloperModeEnabled()) {
+            cacheExpiration = 0;
+        }
+        mFirebaseRemoteConfig.fetch(cacheExpiration)
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+//                            Toast.makeText(SplashActivity.this, "Fetch Succeeded",
+//                                    Toast.LENGTH_SHORT).show();
+
+                            // After config data is successfully fetched, it must be activated before newly fetched
+                            // values are returned.
+                            mFirebaseRemoteConfig.activateFetched();
+                        } else {
+//                            Toast.makeText(SplashActivity.this, "Fetch Failed",
+//                                    Toast.LENGTH_SHORT).show();
+                        }
+                        displayWelcomeMessage();
+                    }
+                });
+    }
+
+    private void displayWelcomeMessage() {
+        welcomeMessage = mFirebaseRemoteConfig.getString(WELCOME_MESSAGE_KEY);
     }
 
 /*
